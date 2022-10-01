@@ -4,6 +4,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = $_POST['data'];
     if (empty($data)) {
         $msg = "Name is empty";
+    } else if(strlen($data) > 1000) {
+        $msg = "Clip must not exceed 1000 characters."
     } else {
         $data = htmlspecialchars($data);
 
