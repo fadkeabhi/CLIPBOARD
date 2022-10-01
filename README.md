@@ -1,5 +1,6 @@
 # CLIPBOARD
  web based clipboard
+ Current preview is available [here](https://djabrj.gq/).
 
 currently only basic function is working
 
