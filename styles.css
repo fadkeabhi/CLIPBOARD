@@ -10,4 +10,5 @@ p{
     position : relative;
     left : 8px;
     width : 97%;
+    word-wrap: break-word;
 }
