@@ -1,0 +1,13 @@
+.clip{
+        
+    border-style: hidden;
+    border-radius: 10px;
+    border-width: 2px;
+    background-color: aquamarine;
+min-height: 5ch;}
+
+p{
+    position : relative;
+    left : 8px;
+    width : 97%;
+}

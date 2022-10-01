@@ -33,23 +33,8 @@ if (mysqli_query($conn, $sql)) {
         <script>
 // to make text copy function
             </script>
-
-    <style>
-        .clip{
-        
-        border-style: hidden;
-        border-radius: 10px;
-        border-width: 2px;
-        background-color: aquamarine;
-    min-height: 5ch;}
-
-    p{
-        position : relative;
-        left : 8px;
-        width : 97%;
-    }
-
-    </style>
+  <link rel="stylesheet" href="styles.css">
+ 
     </head>
 
     <body>
