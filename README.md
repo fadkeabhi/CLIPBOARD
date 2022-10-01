@@ -3,12 +3,12 @@
 
 currently only basic function is working
 
-#to do
+# to do
 improve style
 add limit changer
 user login system with private clips
 add theme switcher
 
-#Any other controbution is welcome
+# Any other controbution is welcome
 
-#HACKTOBERFEST2022
+# HACKTOBERFEST2022
