@@ -13,6 +13,6 @@ user login system with private clips
 
 add theme switcher
 
-# Any other controbution are welcome
+# Any other contributions are welcome
 
 # HACKTOBERFEST2022
