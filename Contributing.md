@@ -21,5 +21,5 @@ Here are a few things that will help us help resolve your issues:
 - Create a new branch: `git checkout -b my-branch-name`
 - Make appropriate changes
 - Commit the changes
-- Push to your branch and [submit a pull request][pr]
+- Push to your branch and raise a PR
 - Wait for your pull request to be reviewed and merged!
