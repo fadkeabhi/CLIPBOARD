@@ -48,15 +48,20 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         <h2>
             MAKE NEW CLIP
         </h2>
+        <div class="container">
+
+        
         <form action="" name="submit" method="post">
             <textarea name="data"></textarea>
             <input type="submit" value="Submit">
         </form>
 
+        </div>
+
         <h2>
             LATEST CLIPS
         </h2>
-
+        <div class="container">
         <form action="" name="filter" method="GET">
             <label for="show-limit">Clips to show :</label>
 
@@ -71,7 +76,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
 
             <button type="submit">Show</button>
         </form>
-
+        </div>
         <h4>
             <?php echo $msg;
             ?>

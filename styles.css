@@ -1,14 +1,49 @@
-.clip{
-        
-    border-style: hidden;
-    border-radius: 10px;
-    border-width: 2px;
-    background-color: aquamarine;
-min-height: 5ch;}
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat&family=Quicksand:wght@500;600&family=Raleway:wght@300&family=Tiro+Bangla&display=swap");
 
-p{
-    position : relative;
-    left : 8px;
-    width : 97%;
-    word-wrap: break-word;
+body {
+  background: #ee9ca7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #ffdde1,
+    #ee9ca7
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #ffdde1,
+    #ee9ca7
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.clip {
+  border-style: hidden;
+  border-radius: 10px;
+  border-width: 2px;
+  background-color: aquamarine;
+  min-height: 5ch;
+}
+
+h1 {
+  font-family: "Cinzel", serif;
+}
+
+h2 {
+  font-family: "Quicksand", sans-serif;
+}
+
+label {
+  font-family: "Montserrat", sans-serif;
+}
+
+p {
+  position: relative;
+  left: 8px;
+  width: 97%;
+  word-wrap: break-word;
+}
+
+div.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
