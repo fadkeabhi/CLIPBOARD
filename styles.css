@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat&family=Quicksand:wght@500;600&family=Raleway:wght@300&family=Tiro+Bangla&display=swap");
-/* add a theme changer on click of a button*/
 :root{
-  --primary-color: #ffdde1;
+  --primary-color: #ffdde1;           /*  :root can be use to assign color to varibles */
   --secondary-color: #ee9ca7;
   --tertiary-color: aquamarine;
   --quaternary-color:  rgb(100, 199, 166);
