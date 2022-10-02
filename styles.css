@@ -1,22 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat&family=Quicksand:wght@500;600&family=Raleway:wght@300&family=Tiro+Bangla&display=swap");
+/* add a theme changer on click of a button*/
+:root{
+  --primary-color: #ffdde1;
+  --secondary-color: #ee9ca7;
+  --tertiary-color: aquamarine;
+  --quaternary-color:  rgb(100, 199, 166);
 
+}
 body {
-  background: #ee9ca7; /* fallback for old browsers */
+  background: var(--primary-color); /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
-    #ffdde1,
-    #ee9ca7
+    var(--primary-color),
+    var(--secondary-color)
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to right,
-    #ffdde1,
-    #ee9ca7
+    var(--primary-color),
+    var(--secondary-color)
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .text-area {
   margin-bottom: 60px;
-  background-color: aquamarine;
+  background-color: var(--tertiary-color);
 }
 
 .submit {
@@ -25,14 +32,14 @@ body {
   left: 35%;
   width: 30%;
   height: 30px;
-  background-color: rgb(100, 199, 166);
+  background-color: var(--quaternary-color);
   color: black;
   font-size: 17px;
   border-radius: 5px;
 }
 
 .show {
-  background-color: rgb(100, 199, 166);
+  background-color: var(--quaternary-color);
   color: black;
   font-size: 17px;
   border-radius: 5px;
@@ -40,14 +47,14 @@ body {
 }
 
 .dropdown {
-  background-color: aquamarine;
+  background-color: var(--tertiary-color);
 }
 
 .clip {
   border-style: hidden;
   border-radius: 10px;
   border-width: 2px;
-  background-color: aquamarine;
+  background-color: var(--tertiary-color);
   min-height: 5ch;
 }
 
