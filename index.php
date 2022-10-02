@@ -1,5 +1,5 @@
 <?php include 'db.php';
-$msg = " ";
+$msg = $_GET['msg'] ?? " ";
 #Retrieving data from the server
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = $_POST['data'];
@@ -17,6 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         #Displaying success message.
         if (mysqli_query($conn, $sql)) {
             $msg = "Clip added successfully";
+            #redirect the user to the same page, but with the msg variable in URL
+            #this prevents "double submit" bug on refresh of the page
+            $args = array_merge($_GET, ['msg' => $msg]);
+            $redirect_url = $_SERVER['PHP_SELF'] . '?' . http_build_query($args);
+            header('Location: ' . $redirect_url, true, 303);
+            exit;
         } else {
             $msg = "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
@@ -41,7 +47,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
 // to make text copy function
             </script>
   <link rel="stylesheet" href="styles.css">
- 
+
     </head>
 
     <body>
