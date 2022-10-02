@@ -86,7 +86,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         </form>
         </div>
         <h4>
-            <?php echo $msg;
+            <?php echo htmlspecialchars($msg);
             ?>
         </h4>
 
