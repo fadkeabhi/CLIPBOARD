@@ -36,14 +36,17 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         <script>
 // to make text copy function
             </script>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="./styles.css">
  
     </head>
 
     <body>
-        <h1>
-            CLIPBOARD
-        </h1>
+        <header> <h1> CLIPBOARD</h1>
+        <div class="link">
+            <a href="login.php">SignUp/Login</a>
+        </div>
+
+</header> 
 
         <h2>
             MAKE NEW CLIP
