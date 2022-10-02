@@ -55,8 +55,8 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
 
         <div class="container">
         <form action="" name="submit" method="post">
-            <textarea name="data" rows=5 cols=70 placeholder="Add Clip Content"></textarea>
-            <input type="submit" value="Submit">
+            <textarea class="text-area" name="data" rows="10" cols="60" placeholder="Add Clip Content"></textarea>
+            <input class="submit" type="submit" value="Submit">
         </form>
         </div>
 
@@ -67,7 +67,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         <form action="" name="filter" method="GET">
             <label for="show-limit">Clips to show :</label>
 
-            <select name="show-limit" id="show-limit">
+            <select class="dropdown" name="show-limit" id="show-limit">
                 <option value="5" <?= $limit === '5' ? 'selected' : ''?>>5</option>
                 <option value="10" <?= $limit === '10' ? 'selected' : ''?>>10</option>
                 <option value="20" <?= $limit === '20' ? 'selected' : ''?>>20</option>
@@ -76,7 +76,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
                 <option value="all" <?= $limit === 'all' ? 'selected' : ''?>>All</option>
             </select>
 
-            <button type="submit">Show</button>
+            <button class="show" type="submit">Show</button>
         </form>
         </div>
         <h4>
