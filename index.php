@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = $_POST['data'];
     #If the retrieved data is empty.
     if (empty($data)) {
-        $msg = "Name is empty";
+        $msg = "Clip is Empty.";
     #If the retrieved data exceeds 1000 characters
     } else if(strlen($data) > 1000) {
         $msg = "Clip must not exceed 1000 characters.";
@@ -52,14 +52,12 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         <h2>
             MAKE NEW CLIP
         </h2>
-        <div class="container">
 
-        
+        <div class="container">
         <form action="" name="submit" method="post">
-            <textarea name="data"></textarea>
+            <textarea name="data" rows=5 cols=70 placeholder="Add Clip Content"></textarea>
             <input type="submit" value="Submit">
         </form>
-
         </div>
 
         <h2>
@@ -100,7 +98,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
             // output data of each row
             while ($row = mysqli_fetch_assoc($result)) {
                 echo '<div class="clip"><br>';
-                echo '<p id="created_at' . $i . '">' . $row["created_at"] . '</p>';
+                echo '<p id="created_at' . $i . '"> Created at :' . $row["created_at"] . '</p>';
                 echo '<p id="clip' . $i . '">' . $row["clip"] . '</p><br></div><br>';
                 //     echo '<a href="#" onclick="CopyToClipboard(#clip' . $i . ');return false;">📄</a><br>' ;
                 ++$i;
