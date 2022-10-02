@@ -1,16 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat&family=Quicksand:wght@500;600&family=Raleway:wght@300&family=Tiro+Bangla&display=swap");
+/* add a theme changer on click of a button*/
+:root{
+  --primary-color-light: #ffdde1;
+  --secondary-color-light: #ee9ca7;
+  --tertiary-color: aquamarine;
+
+}
+[data-theme="dark"] {
+    --primary-color: #9A97F3;
+    --secondary-color: #818cab;
+    --font-color: #e1e1ff;
+    --bg-color: #161625;
+    --heading-color: #818cab;
+}
+
+
+
 
 body {
-  background: #ee9ca7; /* fallback for old browsers */
+  background: var(--primary-color); /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
-    #ffdde1,
-    #ee9ca7
+    var(--primary-color),
+    var(--secondary-color)
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to right,
-    #ffdde1,
-    #ee9ca7
+    var(--primary-color),
+    var(--secondary-color)
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -18,7 +35,7 @@ body {
   border-style: hidden;
   border-radius: 10px;
   border-width: 2px;
-  background-color: aquamarine;
+  background-color: var(--tertiary-color);
   min-height: 5ch;
 }
 
@@ -48,3 +65,6 @@ div.container {
   align-items: center;
   justify-content: center;
 }
+
+
+.button2 {background-color: #008CBA;} /* Blue */

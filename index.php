@@ -37,12 +37,22 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
             MY CLIPBOARD
         </title>
 
-        <script>
+        <script src="index.js">
 // to make text copy function
             </script>
   <link rel="stylesheet" href="styles.css">
  
     </head>
+
+    <nav>
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox">
+    <input type="checkbox" id="checkbox" />
+    <div class="slider round"></div>
+  </label>
+    <em>Switch</em>
+  </div>
+</nav>
 
     <body>
         <h1>
