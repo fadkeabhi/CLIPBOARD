@@ -85,9 +85,9 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         <?php
         # showing recent clips
         if(in_array($limit, ['5', '10', '20', '50', '100'], true)) {
-            $sql = "SELECT clip FROM clips ORDER BY id DESC LIMIT $limit";
+            $sql = "SELECT clip, created_at FROM clips ORDER BY id DESC LIMIT $limit";
         } else {
-            $sql = "SELECT clip FROM clips ORDER BY id DESC";
+            $sql = "SELECT clip, created_at FROM clips ORDER BY id DESC";
         }
         $result = mysqli_query($conn, $sql);
         $i = 1;
@@ -96,6 +96,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
             // output data of each row
             while ($row = mysqli_fetch_assoc($result)) {
                 echo '<div class="clip"><br>';
+                echo '<p id="created_at' . $i . '">' . $row["created_at"] . '</p>';
                 echo '<p id="clip' . $i . '">' . $row["clip"] . '</p><br></div><br>';
                 //     echo '<a href="#" onclick="CopyToClipboard(#clip' . $i . ');return false;">📄</a><br>' ;
                 ++$i;

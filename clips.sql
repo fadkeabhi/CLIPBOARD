@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: sql201.epizy.com
--- Generation Time: Oct 01, 2022 at 07:29 AM
--- Server version: 10.3.27-MariaDB
--- PHP Version: 7.2.22
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 02 Okt 2022 pada 05.47
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,44 +18,45 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `epiz_32703839_clipboard`
+-- Database: `clipboard`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `clips`
+-- Struktur dari tabel `clips`
 --
 
 CREATE TABLE `clips` (
   `id` int(11) NOT NULL,
-  `clip` longtext NOT NULL
+  `clip` longtext NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `clips`
+-- Dumping data untuk tabel `clips`
 --
 
-INSERT INTO `clips` (`id`, `clip`) VALUES
-(1, 'test 1'),
-(2, 'test 2\r\n');
+INSERT INTO `clips` (`id`, `clip`, `created_at`) VALUES
+(1, 'test 1', '2022-10-02 11:40:38'),
+(2, 'test 2\r\n', '2022-10-02 11:40:38');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `clips`
+-- Indeks untuk tabel `clips`
 --
 ALTER TABLE `clips`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `clips`
+-- AUTO_INCREMENT untuk tabel `clips`
 --
 ALTER TABLE `clips`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
