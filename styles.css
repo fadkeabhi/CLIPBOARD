@@ -39,6 +39,7 @@ p {
   left: 8px;
   width: 97%;
   word-wrap: break-word;
+  white-space: pre;
 }
 
 div.container {
