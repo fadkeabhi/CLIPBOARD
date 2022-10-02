@@ -55,7 +55,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
 
         <div class="container">
         <form action="" name="submit" method="post">
-            <textarea class="text-area" name="data" rows="10" cols="60" placeholder="Add Clip Content"></textarea>
+            <textarea class="text-area" name="data" rows="8" cols="45" placeholder="Add Clip Content"></textarea>
             <input class="submit" type="submit" value="Submit">
         </form>
         </div>
