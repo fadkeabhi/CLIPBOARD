@@ -1,8 +1,35 @@
-# CLIPBOARD
- web based clipboard
- Current preview is available [here](https://djabrj.gq/).
+<center><img src="images/cb.svg"></center>
 
-currently only basic function is working
+# CLIPBOARD
+A web based clipboard.
+
+The simplest method for transmitting data across internet-connected devices
+
+
+<br>
+
+> Current preview is available [here](https://djabrj.gq/).
+
+<br>
+<br>
+
+# Features
+- Multiple Themes
+- Interactive
+- Share information among all devices
+
+<br>
+<br>
+
+# Techstacks
+- PHP
+- CSS
+- HTML
+- JS
+- SQL
+
+<br>
+<br>
 
 # Installation
 
@@ -11,13 +38,25 @@ currently only basic function is working
 3. Set up your own database credentials in config.php
 4. Import `clips.sql` into the database (e.g. `mysql -uroot clipboard < clips.sql`)
 
-# to do
+
+# To Do
 
 - [ ] improve style
 - [x] add limit changer
 - [ ] user login system with private clips
 - [ ] add theme switcher
 
-# Any other contributions are welcome
+<br>
+<br>
 
-# HACKTOBERFEST2022
+<div align="center"  class="icons-social" style="margin-left: 10px;">
+ <h3> <b>All Contributions are appreciated </b> </h3>
+ <br>
+ <a   target="_blank" href="https://hacktoberfest.com">
+			<img src="images/hacktober.svg"  height="40" ></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a style="margin-left: 10px;" target="_blank" href="https://github.com/fadkeabhi/CLIPBOARD">
+		<img src="images/github.svg" height="40"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a style="margin-left: 10px;" target="_blank" href="">
+			<img src="images/discord.svg" height="40"
+            width ="40"></a>
+      </div>
