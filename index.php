@@ -1,16 +1,20 @@
 <?php include 'db.php';
 $msg = " ";
+#Retrieving data from the server
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = $_POST['data'];
+    #If the retrieved data is empty.
     if (empty($data)) {
-        $msg = "Name is empty";
+        $msg = "Clip is Empty.";
+    #If the retrieved data exceeds 1000 characters
     } else if(strlen($data) > 1000) {
         $msg = "Clip must not exceed 1000 characters.";
+   #If the data satisfies the condictions,inserting data to database
     } else {
         $data = htmlspecialchars($data);
 
         $sql = "INSERT INTO clips (clip) VALUES ('$data')";
-
+        #Displaying success message.
         if (mysqli_query($conn, $sql)) {
             $msg = "Clip added successfully";
         } else {
@@ -51,14 +55,12 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         <h2>
             MAKE NEW CLIP
         </h2>
+
         <div class="container">
-
-        
         <form action="" name="submit" method="post">
-            <textarea name="data"></textarea>
-            <input type="submit" value="Submit">
+            <textarea class="text-area" name="data" rows="8" cols="45" placeholder="Add Clip Content"></textarea>
+            <input class="submit" type="submit" value="Submit">
         </form>
-
         </div>
 
         <h2>
@@ -68,7 +70,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         <form action="" name="filter" method="GET">
             <label for="show-limit">Clips to show :</label>
 
-            <select name="show-limit" id="show-limit">
+            <select class="dropdown" name="show-limit" id="show-limit">
                 <option value="5" <?= $limit === '5' ? 'selected' : ''?>>5</option>
                 <option value="10" <?= $limit === '10' ? 'selected' : ''?>>10</option>
                 <option value="20" <?= $limit === '20' ? 'selected' : ''?>>20</option>
@@ -77,7 +79,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
                 <option value="all" <?= $limit === 'all' ? 'selected' : ''?>>All</option>
             </select>
 
-            <button type="submit">Show</button>
+            <button class="show" type="submit">Show</button>
         </form>
         </div>
         <h4>
@@ -88,9 +90,9 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         <?php
         # showing recent clips
         if(in_array($limit, ['5', '10', '20', '50', '100'], true)) {
-            $sql = "SELECT clip FROM clips ORDER BY id DESC LIMIT $limit";
+            $sql = "SELECT clip, created_at FROM clips ORDER BY id DESC LIMIT $limit";
         } else {
-            $sql = "SELECT clip FROM clips ORDER BY id DESC";
+            $sql = "SELECT clip, created_at FROM clips ORDER BY id DESC";
         }
         $result = mysqli_query($conn, $sql);
         $i = 1;
@@ -99,6 +101,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
             // output data of each row
             while ($row = mysqli_fetch_assoc($result)) {
                 echo '<div class="clip"><br>';
+                echo '<p id="created_at' . $i . '"> Created at :' . $row["created_at"] . '</p>';
                 echo '<p id="clip' . $i . '">' . $row["clip"] . '</p><br></div><br>';
                 //     echo '<a href="#" onclick="CopyToClipboard(#clip' . $i . ');return false;">📄</a><br>' ;
                 ++$i;

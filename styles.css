@@ -28,6 +28,34 @@ body {
 a:hover, a:active {
   background-color: red;
 }
+.text-area {
+  margin-bottom: 60px;
+  background-color: aquamarine;
+}
+
+.submit {
+  position: absolute;
+  top: 300px;
+  left: 35%;
+  width: 30%;
+  height: 30px;
+  background-color: rgb(100, 199, 166);
+  color: black;
+  font-size: 17px;
+  border-radius: 5px;
+}
+
+.show {
+  background-color: rgb(100, 199, 166);
+  color: black;
+  font-size: 17px;
+  border-radius: 5px;
+
+}
+
+.dropdown {
+  background-color: aquamarine;
+}
 
 .clip {
   border-style: hidden;
@@ -39,10 +67,16 @@ a:hover, a:active {
 
 h1 {
   font-family: "Cinzel", serif;
+  font-weight: bold;
+  text-align: center;
 }
 
 h2 {
+  margin-top: 30px;
   font-family: "Quicksand", sans-serif;
+  text-align: center;
+  font-size: larger;
+  font-style: italic;
 }
 
 label {
