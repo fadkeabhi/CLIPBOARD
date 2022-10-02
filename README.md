@@ -4,6 +4,12 @@
 
 currently only basic function is working
 
+# Installation
+
+1. Clone this repository (e.g. `git clone https://github.com/fadkeabhi/CLIPBOARD`)
+2. Copy config.sample.php to config.php (`cp config.sample.php config.php`)
+3. Set up your own database credentials in config.php
+
 # to do
 
 - [ ] improve style
