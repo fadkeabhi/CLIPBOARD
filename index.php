@@ -1,16 +1,20 @@
 <?php include 'db.php';
 $msg = " ";
+#Retrieving data from the server
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = $_POST['data'];
+    #If the retrieved data is empty.
     if (empty($data)) {
         $msg = "Name is empty";
+    #If the retrieved data exceeds 1000 characters
     } else if(strlen($data) > 1000) {
         $msg = "Clip must not exceed 1000 characters.";
+   #If the data satisfies the condictions,inserting data to database
     } else {
         $data = htmlspecialchars($data);
 
         $sql = "INSERT INTO clips (clip) VALUES ('$data')";
-
+        #Displaying success message.
         if (mysqli_query($conn, $sql)) {
             $msg = "Clip added successfully";
         } else {
