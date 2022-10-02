@@ -1,9 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "clipboard";
-
+require_once 'config.php';
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
