@@ -7,3 +7,6 @@
   }
 
 body{color:rgb(255 255 255 / 0.87);}
+
+textarea{color:rgb(255 255 255 / 0.97);}
+textarea::placeholder{color:#121212;}
