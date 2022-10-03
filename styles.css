@@ -17,14 +17,18 @@ body {
 .text-area {
   margin-bottom: 60px;
   background-color: var(--tertiary-color);
+  border-radius: 10px;
+  border-width: 2px;
 }
 
 .submit {
-  position: absolute;
-  top: 350px;
-  left: 35%;
+  position: relative;
+  align:center;
+  top: -40px;
+  left: 60%;
   width: 30%;
   height: 30px;
+max-width:100px;
   background-color: var(--quaternary-color);
   color: black;
   font-size: 17px;
