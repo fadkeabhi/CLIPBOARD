@@ -44,9 +44,11 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         </title>
 
         <script>
-// to make text copy function
+
             </script>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" id="theme-switch" href="">
+
 
     </head>
 
@@ -54,6 +56,15 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         <h1>
             CLIPBOARD
         </h1>
+
+        <header>
+        <div class="theme-switches">
+            <div data-theme="default" class="switch" id="switch-1"></div>
+            <div data-theme="dark" class="switch" id="switch-2"></div>
+
+        </div>
+    </header>
+
 
         <h2>
             MAKE NEW CLIP
@@ -120,6 +131,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
 ?>
 <br>
 
+<script src="./themeswitch.js"></script>
 
     </body>
 </html>

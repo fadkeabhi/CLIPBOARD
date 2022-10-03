@@ -1,0 +1,7 @@
+:root{
+    --primary-color: #ffdde1;           /*  :root can be use to assign color to varibles */
+    --secondary-color: #ee9ca7;
+    --tertiary-color: aquamarine;
+    --quaternary-color:  rgb(100, 199, 166);
+  
+  }
