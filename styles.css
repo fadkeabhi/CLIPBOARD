@@ -1,11 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat&family=Quicksand:wght@500;600&family=Raleway:wght@300&family=Tiro+Bangla&display=swap");
-:root{
-  --primary-color: #ffdde1;           /*  :root can be use to assign color to varibles */
-  --secondary-color: #ee9ca7;
-  --tertiary-color: aquamarine;
-  --quaternary-color:  rgb(100, 199, 166);
 
-}
 body {
   background: var(--primary-color); /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -27,7 +21,7 @@ body {
 
 .submit {
   position: absolute;
-  top: 300px;
+  top: 350px;
   left: 35%;
   width: 30%;
   height: 30px;
@@ -88,4 +82,45 @@ div.container {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+/*  All theme switching related style below */
+
+.theme-switches {
+  display: flex;
+  justify-content: center;
+}
+
+.switch {
+  border: 2px solid black;
+  border-radius: 50px;
+  height: 30px;
+  width: 30px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.switch:hover {
+  transform: scale(1.2);
+  transition: 0.3s ease-in-out;
+}
+
+#switch-1 {
+   background: linear-gradient(
+    to right,
+    pink 0%,
+    pink 50%,
+    paleturquoise 50%,
+    paleturquoise 100%
+  );
+}
+
+#switch-2 {
+   background: linear-gradient(
+    to right,
+    #2215d3 0%,
+    #2215d3 50%,
+    rgb(110, 160, 29) 50%,
+    rgb(110, 160, 29) 100%
+  );
 }
