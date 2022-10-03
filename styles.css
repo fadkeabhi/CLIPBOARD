@@ -17,8 +17,12 @@ body {
 .text-area {
   margin-bottom: 60px;
   background-color: var(--tertiary-color);
-  border-radius: 10px;
-  border-width: 2px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position:relative;
+  left:15%; 
+  width : 70%;
 }
 
 .submit {
