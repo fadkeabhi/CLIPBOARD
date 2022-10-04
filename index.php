@@ -48,6 +48,10 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
             </script>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" id="theme-switch" href="">
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
 
 
     </head>
@@ -132,6 +136,8 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
 <br>
 
 <script src="./themeswitch.js"></script>
+        
+        <a class="gotopbtn" href="#"><i class="fas fa-arrow-up"></i></a>
 
     </body>
 </html>
