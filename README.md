@@ -44,7 +44,7 @@ The simplest method for transmitting data across internet-connected devices
 - [ ] improve style
 - [x] add limit changer
 - [ ] user login system with private clips
-- [ ] add theme switcher
+- [x] add theme switcher
 
 <br>
 <br>
