@@ -41,10 +41,11 @@ The simplest method for transmitting data across internet-connected devices
 
 # To Do
 
-- [ ] improve style
+- [x] improve style
 - [x] add limit changer
 - [ ] user login system with private clips
 - [x] add theme switcher
+- [ ] add more themes
 
 <br>
 <br>
