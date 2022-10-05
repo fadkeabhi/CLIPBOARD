@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat&family=Quicksand:wght@500;600&family=Raleway:wght@300&family=Tiro+Bangla&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat&family=Quicksand:wght@500;600&family=Raleway:wght@300&family=Tiro+Bangla&display=swap');
 
 body {
   background: var(--primary-color); /* fallback for old browsers */
@@ -20,19 +20,19 @@ body {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  position:relative;
-  left:15%; 
-  width : 70%;
+  position: relative;
+  left: 15%;
+  width: 70%;
 }
 
 .submit {
   position: relative;
-  align:center;
+  align: center;
   top: -40px;
   left: 60%;
   width: 30%;
   height: 30px;
-max-width:100px;
+  max-width: 100px;
   background-color: var(--quaternary-color);
   color: black;
   font-size: 17px;
@@ -44,7 +44,6 @@ max-width:100px;
   color: black;
   font-size: 17px;
   border-radius: 5px;
-
 }
 
 .dropdown {
@@ -60,21 +59,21 @@ max-width:100px;
 }
 
 h1 {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-weight: bold;
   text-align: center;
 }
 
 h2 {
   margin-top: 30px;
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   font-size: larger;
   font-style: italic;
 }
 
 label {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 p {
@@ -82,7 +81,7 @@ p {
   left: 8px;
   width: 97%;
   word-wrap: break-word;
-  white-space: pre;
+  white-space: pre-line;
 }
 
 div.container {
@@ -114,7 +113,7 @@ div.container {
 }
 
 #switch-1 {
-   background: linear-gradient(
+  background: linear-gradient(
     to right,
     pink 0%,
     pink 50%,
@@ -124,7 +123,7 @@ div.container {
 }
 
 #switch-2 {
-   background: linear-gradient(
+  background: linear-gradient(
     to right,
     #2215d3 0%,
     #2215d3 50%,
