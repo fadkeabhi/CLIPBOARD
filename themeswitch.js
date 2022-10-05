@@ -1,6 +1,6 @@
-let switches = document.getElementsByClassName('switch');
+var switches = document.getElementsByClassName('switch');
 
-let style = localStorage.getItem('style');
+var style = localStorage.getItem('style');
 
 if (style == null) {
   setTheme('default');
@@ -8,9 +8,11 @@ if (style == null) {
   setTheme(style);
 }
 
-for (let i of switches) {
-  i.addEventListener('click', function () {
-    let theme = this.dataset.theme;
+for (var i = 0; i <= Object.keys(switches).length; i++) {
+  var switchElement = switches[i];
+
+  switchElement.addEventListener('click', function () {
+    var theme = this.dataset.theme;
     setTheme(theme);
   });
 }
@@ -20,6 +22,7 @@ function setTheme(theme) {
     document.getElementById('theme-switch').href = './themes/default.css';
   } else if (theme == 'dark') {
     document.getElementById('theme-switch').href = './themes/dark.css';
-  } 
+  }
+
   localStorage.setItem('style', theme);
 }
