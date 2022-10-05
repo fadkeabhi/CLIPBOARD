@@ -14,37 +14,11 @@ body {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.text-area {
-  margin-bottom: 60px;
-  background-color: var(--tertiary-color);
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  position:relative;
-  left:15%; 
-  width : 70%;
-}
-
-.submit {
-  position: relative;
-  align:center;
-  top: -40px;
-  left: 60%;
-  width: 30%;
-  height: 30px;
-max-width:100px;
-  background-color: var(--quaternary-color);
-  color: black;
-  font-size: 17px;
-  border-radius: 5px;
-}
-
 .show {
   background-color: var(--quaternary-color);
   color: black;
   font-size: 17px;
   border-radius: 5px;
-
 }
 
 .dropdown {
@@ -85,6 +59,31 @@ p {
   white-space: pre;
 }
 
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formContainer > textarea {
+  background-color: var(--tertiary-color);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.formContainer > span {
+  font-family: "Montserrat", sans-serif;
+  align-self: flex-end;
+}
+
+.formContainer > input[type="submit"] {
+  width: 100%;
+  background-color: var(--quaternary-color);
+  font-size: 17px;
+  border-radius: 5px;
+}
+
 div.container {
   display: flex;
   flex-direction: column;
@@ -114,7 +113,7 @@ div.container {
 }
 
 #switch-1 {
-   background: linear-gradient(
+  background: linear-gradient(
     to right,
     pink 0%,
     pink 50%,
@@ -124,7 +123,7 @@ div.container {
 }
 
 #switch-2 {
-   background: linear-gradient(
+  background: linear-gradient(
     to right,
     #2215d3 0%,
     #2215d3 50%,
