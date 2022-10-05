@@ -1,7 +1,10 @@
 <?php
+/**
+ * @var $conn mysqli
+ */
 include __DIR__ . '/db.php';
 
-$msg = $_GET['msg'] ?? " ";
+$msg = $_GET['msg'] ?? ' ';
 
 // Retrieving data from the server
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -9,10 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // If the retrieved data is empty.
     if (empty($data)) {
-        $msg = "Clip is Empty.";
+        $msg = 'Clip is empty.';
     // If the retrieved data exceeds 1000 characters
-    } else if(strlen($data) > 1000) {
-        $msg = "Clip must not exceed 1000 characters.";
+    } elseif (strlen($data) > 1000) {
+        $msg = 'Clip must not exceed 1000 characters.';
     // If the data satisfies the condictions,inserting data to database
     } else {
         $data = htmlspecialchars($data);
@@ -21,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Displaying success message.
         if (mysqli_query($conn, $sql)) {
-            $msg = "Clip added successfully";
+            $msg = 'Clip added successfully';
 
             // redirect the user to the same page, but with the msg variable in URL
             // this prevents "double submit" bug on refresh of the page
@@ -38,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // limit of number of clips displayed
-$limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
+$limit = $_GET['show-limit'] ?? 5;
 ?>
 
 <!doctype html>
@@ -127,7 +130,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
                     <br>
                 </div>
                 <br>
-                
+
                 <?php // echo '<a href="#" onclick="CopyToClipboard(#clip' . $i . ');return false;">📄</a><br>'; ?>
                 <?php $i++; ?>
             <?php endwhile; ?>
