@@ -54,7 +54,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
     </head>
 
     <body>
-        <h1>
+        <h1 id="mainHeading">
             CLIPBOARD
         </h1>
 
@@ -72,7 +72,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         </h2>
 
         <div class="container">
-        <form action="" name="submit" method="post">
+        <form action="" name="submit" method="post" class="textBox">
             <textarea class="text-area" name="data" rows="8" cols="45" placeholder="Add Clip Content"></textarea>
             <input class="submit" type="submit" value="Submit">
         </form>

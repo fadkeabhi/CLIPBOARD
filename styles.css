@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat&family=Quicksand:wght@500;600&family=Raleway:wght@300&family=Tiro+Bangla&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
 body {
   background: var(--primary-color); /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -14,30 +14,71 @@ body {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+/*style for textbox in the heading*/
+
+div.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+form.textBox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
 .text-area {
-  margin-bottom: 60px;
+  position:relative;
+  margin-bottom: 40px;
   background-color: var(--tertiary-color);
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  position:relative;
-  left:15%; 
+   box-sizing: border-box;
   width : 70%;
+  border-radius: 0px 10px 10px 10px;
 }
 
 .submit {
+  display: inline-block;
   position: relative;
-  align:center;
-  top: -40px;
-  left: 60%;
+  align-items:center;
   width: 30%;
   height: 30px;
-max-width:100px;
+  max-width:100px;
   background-color: var(--quaternary-color);
   color: black;
   font-size: 17px;
   border-radius: 5px;
 }
+
+::placeholder {
+   text-align: center; 
+}
+
+/* or, for legacy browsers */
+
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
+}
+
+/*secondary button styles*/
+
 
 .show {
   background-color: var(--quaternary-color);
@@ -59,6 +100,13 @@ max-width:100px;
   min-height: 5ch;
 }
 
+
+/*text related styles*/
+#mainHeading{
+  font-family: 'Amatic SC', cursive;
+  font-size: 70px;
+}
+
 h1 {
   font-family: "Cinzel", serif;
   font-weight: bold;
@@ -70,7 +118,6 @@ h2 {
   font-family: "Quicksand", sans-serif;
   text-align: center;
   font-size: larger;
-  font-style: italic;
 }
 
 label {
@@ -85,12 +132,8 @@ p {
   white-space: pre;
 }
 
-div.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+
+
 
 /*  All theme switching related style below */
 
@@ -116,19 +159,16 @@ div.container {
 #switch-1 {
    background: linear-gradient(
     to right,
-    pink 0%,
-    pink 50%,
-    paleturquoise 50%,
-    paleturquoise 100%
+    #f3a6af 0%,
+    #959bf6 100%
   );
 }
 
 #switch-2 {
    background: linear-gradient(
     to right,
-    #2215d3 0%,
-    #2215d3 50%,
-    rgb(110, 160, 29) 50%,
-    rgb(110, 160, 29) 100%
+    #14172c 0%,
+    #c08058 100%
   );
 }
+
