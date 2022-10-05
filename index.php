@@ -42,6 +42,7 @@ $limit = isset($_GET['show-limit']) ? $_GET['show-limit'] : 5;
         <title>
             MY CLIPBOARD
         </title>
+        <link rel="icon" href="/images/clipboard2.ico">
 
         <script>
 
