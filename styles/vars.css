@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat&family=Quicksand:wght@500;600&family=Raleway:wght@300&family=Tiro+Bangla&display=swap");
+
+:root {
+  --main-color: #1b0c66;
+  --main-color-ligth: #331f8f;
+  --main-color-accents: #5d45cd;
+
+  --accents-1: #f54ab6;
+  --accents-2: #ead3fb;
+  --accents-3: #3889fd;
+  --accents-4: #b8c3ff;
+
+  --text-color: #f8f8f8;
+  --font-family: 'Noto Sans', sans-serif;
+}

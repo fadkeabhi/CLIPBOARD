@@ -1,0 +1,15 @@
+.button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  color: inherit;
+  padding: 1.3rem 2.6rem;
+  background-color: var(--main-color-accents);
+  border-radius: 1rem;
+  font-weight: bold;
+  transition: opacity 300ms easy;
+}
+.button:hover {
+  opacity: 0.7;
+}
