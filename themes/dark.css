@@ -1,10 +1,9 @@
-:root{
-    --primary-color: #121212;           /*  :root can be use to assign color to varibles */
-    --secondary-color: #121212;
-    --tertiary-color: #62aabdcc;
-    --quaternary-color:  #3d6e7c;
-  
-  }
+:root {
+    --primary-color: #14172c;   /*  :root can be use to assign color to varibles */
+    --secondary-color: #14172c;
+    --tertiary-color: #c08058;
+    --quaternary-color: #799de0;
+}
 
 body{color:rgb(255 255 255 / 0.87);}
 
