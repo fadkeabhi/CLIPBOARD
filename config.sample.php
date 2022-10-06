@@ -1,5 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "clipboard";
+
+$servername = '127.0.0.1';
+$username = 'root';
+$password = '';
+$dbname = 'clipboard';
