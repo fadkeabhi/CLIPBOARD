@@ -1,0 +1,127 @@
+@import url('./vars.css');
+@import url('./globals.css');
+@import url('./utils.css');
+
+/* --- container --- */
+.container {
+  max-width: 108rem;
+  margin: 0 auto;
+  padding: 7rem 0;
+}
+
+/* --- Theme --- */
+.theme {
+  margin-top: 3rem;
+}
+.theme__switches {
+  display: flex;
+  justify-content: center;
+}
+.theme__switch {
+  outline: 3px solid var(--main-color-accents);
+  border-radius: 50px;
+  height: 30px;
+  width: 30px;
+  margin: 10px;
+  cursor: pointer;
+}
+.theme__switch:hover {
+  transform: scale(1.2);
+  transition: 0.3s ease-in-out;
+}
+/*  All theme switching related style below */
+#switch-1 {
+  background: linear-gradient(
+    to right,
+    pink 0%,
+    pink 50%,
+    paleturquoise 50%,
+    paleturquoise 100%
+  );
+}
+#switch-2 {
+  background: linear-gradient(
+    to right,
+    #2215d3 0%,
+    #2215d3 50%,
+    rgb(110, 160, 29) 50%,
+    rgb(110, 160, 29) 100%
+  );
+}
+
+/* --- Form --- */
+.form {
+  margin-top: 7rem;
+}
+.form__form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form__clip--bg {
+  position: relative;
+  background: rgb(245,74,182);
+  background: -moz-linear-gradient(90deg, rgba(245,74,182,1) 0%, rgba(63,137,252,1) 100%);
+  background: -webkit-linear-gradient(90deg, rgba(245,74,182,1) 0%, rgba(63,137,252,1) 100%);
+  background: linear-gradient(90deg, rgba(245,74,182,1) 0%, rgba(63,137,252,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f54ab6",endColorstr="#3f89fc",GradientType=1);
+  height: 5rem;
+  width: 35rem;
+  top: -3rem;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  border-radius: 2rem;
+  margin: 0 auto;
+}
+.form__clip {
+  padding: 1rem;
+  color: inherit;
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  width: 45rem;
+  max-width: 45rem;
+  min-width: 45rem;
+}
+.form__clip:focus {
+  outline: var(--accents-3) 1px solid;
+}
+.show {
+  background-color: var(--quaternary-color);
+  color: black;
+  font-size: 17px;
+  border-radius: 5px;
+
+}
+
+/* --- clips --- */
+.clips {
+  margin-top: 10rem;
+}
+
+/* --- cards --- */
+.cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* --- clip --- */
+.clip {
+  margin-top: 3rem;
+  background-color: var(--main-color-ligth);
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+}
+.clip__date {
+  font-weight: bold;
+}
