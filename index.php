@@ -140,5 +140,7 @@ $limit = $_GET['show-limit'] ?? 5;
         <br>
 
         <script src="./themeswitch.js"></script>
+        <a class="gotopbtn" href="#"><i class="fas fa-arrow-up"></i></a>
+
     </body>
 </html>
