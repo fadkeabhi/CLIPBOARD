@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Displaying success message.
         if (mysqli_query($conn, $sql)) {
-            $msg = 'Clip added successfully';
+            $msg = ' Clip added successfully ';
 
             // redirect the user to the same page, but with the msg variable in URL
             // this prevents "double submit" bug on refresh of the page
@@ -104,9 +104,9 @@ $limit = $_GET['show-limit'] ?? 5;
         <h4>
             <?= htmlspecialchars($msg); ?>
         </h4>
-
         <?php
         // showing recent clips
+
         if (in_array($limit, ['5', '10', '20', '50', '100'], true)) {
             $sql = "SELECT clip, created_at FROM clips ORDER BY id DESC LIMIT $limit";
         } else {
@@ -116,8 +116,8 @@ $limit = $_GET['show-limit'] ?? 5;
         $result = mysqli_query($conn, $sql);
         $i = 1;
         ?>
-
         <?php if (mysqli_num_rows($result) > 0): ?>
+        <div class="all-clip-container">
             <?php
             $i = 0;
             // output data of each row
@@ -138,6 +138,7 @@ $limit = $_GET['show-limit'] ?? 5;
             <p>0 results</p>
         <?php endif; ?>
         <br>
+        </div>
 
         <script src="./themeswitch.js"></script>
     </body>

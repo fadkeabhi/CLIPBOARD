@@ -91,13 +91,24 @@ form.textBox{
 .dropdown {
   background-color: var(--tertiary-color);
 }
+.all-clip-container{
+  display: grid;
+  column-gap: 30px;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
 
+}
 .clip {
   border-style: hidden;
   border-radius: 10px;
   border-width: 2px;
-  background-color: var(--tertiary-color);
+  background-color: purple;
   min-height: 5ch;
+  height: 12em;
+  /* height: 200px; */
+  color: white;
+  box-shadow: 5px 4px 10px black;
+  width: 14em;
 }
 
 
@@ -129,6 +140,8 @@ p {
   left: 8px;
   width: 97%;
   word-wrap: break-word;
+  line-break: auto;
+  word-break: break-all;
   white-space: pre;
 }
 
@@ -172,3 +185,11 @@ p {
   );
 }
 
+/* media query for clip card */
+@media screen and (max-width:600px) {
+  .all-clip-container{
+   display: grid;
+   grid-template-columns: auto;
+  }
+  
+}
