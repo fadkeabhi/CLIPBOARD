@@ -99,7 +99,18 @@ form.textBox{
   background-color: var(--tertiary-color);
   min-height: 5ch;
 }
+.gotopbtn{
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background: #1a88d1;
+    bottom: 20px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 55px;
+    font-size: 40;
 
+}
 
 /*text related styles*/
 #mainHeading{
