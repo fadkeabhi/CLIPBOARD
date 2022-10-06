@@ -15,7 +15,7 @@ if (!file_exists($configFile)) {
 require_once $configFile;
 
 // Create connection
-$conn = new mysqli("localhost", "root", "sneha", "clipboard");
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
