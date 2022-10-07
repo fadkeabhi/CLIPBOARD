@@ -34,7 +34,7 @@ The simplest method for transmitting data across internet-connected devices
 ## 🏁 Getting Started <a name = "getting_started"></a>
 > Current preview is available [here](https://djabrj.gq/).
 
-## Installion <a name = "installation"></a>
+## ⚙️Installation <a name = "installation"></a>
 1. Clone this repository (e.g. `git clone https://github.com/fadkeabhi/CLIPBOARD`)
 2. Copy config.sample.php to config.php (`cp config.sample.php config.php`)
 3. Set up your own database credentials in config.php
