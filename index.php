@@ -24,7 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Displaying success message.
         if (mysqli_query($conn, $sql)) {
-            $msg = 'Clip added successfully';
+            $msg = '<div id="alert">
+            <h3 style="background-color:#f6f2c7; margin-left:5px; padding:6px;">Clip added successfully
+            <span style="float:right;text-decoration:underline;color:blue;cursor:pointer;" onclick=vanish()>Close</span>
+            </h3>
+            </div>';
+        
 
             // redirect the user to the same page, but with the msg variable in URL
             // this prevents "double submit" bug on refresh of the page
@@ -102,7 +107,7 @@ $limit = $_GET['show-limit'] ?? 5;
         </div>
 
         <h4>
-            <?= htmlspecialchars($msg); ?>
+            <?php echo $msg ?>
         </h4>
 
         <?php
@@ -125,8 +130,9 @@ $limit = $_GET['show-limit'] ?? 5;
             ?>
                 <div class="clip">
                     <br>
-                    <p id="created_at<?= $i ?>">Created at :<?= $row["created_at"] ?></p>
-                    <p id="clip<?= $i ?>"><?= $row["clip"] ?></p>
+                    <p id="created_at<?= $i ?>" class="created">Created at :<?= $row["created_at"] ?></p>
+                    
+                    <p id="clip<?= $i ?>" class="clips"><?= $row["clip"] ?></p>
                     <br>
                 </div>
                 <br>
@@ -140,5 +146,10 @@ $limit = $_GET['show-limit'] ?? 5;
         <br>
 
         <script src="./themeswitch.js"></script>
+        <script>
+            function vanish(){
+                document.getElementById("alert").style.display="none";
+            }
+        </script>
     </body>
 </html>
