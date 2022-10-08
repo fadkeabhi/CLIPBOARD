@@ -153,6 +153,7 @@ $limit = $_GET['show-limit'] ?? 5;
         document.documentElement.scrollTop=0;
         }
         <button onclick="topFunction()" id="ScrollBtn" title="Go to top">Top</button>
+        </script>
 
         
  
