@@ -50,7 +50,7 @@ form.textBox{
   height: 30px;
   max-width:100px;
   background-color: var(--quaternary-color);
-  color: black;
+  color: white;
   font-size: 17px;
   border-radius: 5px;
 }
@@ -82,7 +82,7 @@ form.textBox{
 
 .show {
   background-color: var(--quaternary-color);
-  color: black;
+  color: white;
   font-size: 17px;
   border-radius: 5px;
 
