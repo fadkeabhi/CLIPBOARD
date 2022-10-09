@@ -110,7 +110,7 @@ $limit = $_GET['show-limit'] ?? 5;
         if (in_array($limit, ['5', '10', '20', '50', '100'], true)) {
             $sql = "SELECT clip, created_at FROM clips ORDER BY id DESC LIMIT $limit";
         } else {
-            $sql = "SELECT clip, created_at FROM clips ORDER BY id DESC";
+            $sql = "SELECT clip, created_at FROM clips ORDER BY id DESC LIMIT 5";
         }
 
         $result = mysqli_query($conn, $sql);
