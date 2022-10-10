@@ -8,7 +8,7 @@ if (style == null) {
   setTheme(style);
 }
 
-for (var i = 0; i <= Object.keys(switches).length; i++) {
+for (var i = 0; i < Object.keys(switches).length; i++) {
   var switchElement = switches[i];
 
   switchElement.addEventListener('click', function () {
