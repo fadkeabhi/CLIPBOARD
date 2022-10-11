@@ -140,5 +140,6 @@ $limit = $_GET['show-limit'] ?? 5;
         <br>
 
         <script src="./themeswitch.js"></script>
+        <script src="./clipboard.js"></script>
     </body>
 </html>
