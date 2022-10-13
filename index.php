@@ -140,5 +140,24 @@ $limit = $_GET['show-limit'] ?? 5;
         <br>
 
         <script src="./themeswitch.js"></script>
+        <script>
+        function scrollFunction(){
+        if(document.body.scrollTop>20 || document.documentElement.scrollTop>20){
+        scrollbutton.style.display="block";
+        else{
+        scroll.style.display="none";
+        }
+        }
+        function topFunction(){
+        document.body.scrollTop=0;
+        document.documentElement.scrollTop=0;
+        }
+        <button onclick="topFunction()" id="ScrollBtn" title="Go to top">Top</button>
+        </script>
+
+        
+ 
+
+
     </body>
 </html>
