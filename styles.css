@@ -100,6 +100,9 @@ form.textBox{
   min-height: 5ch;
 }
 
+.clip button {
+  float: right;
+}
 
 /*text related styles*/
 #mainHeading{
