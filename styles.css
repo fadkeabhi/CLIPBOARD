@@ -21,6 +21,8 @@ div.container {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width:80%;
+  margin:auto;
 }
 
 form.textBox{
@@ -40,6 +42,7 @@ form.textBox{
    box-sizing: border-box;
   width : 70%;
   border-radius: 0px 10px 10px 10px;
+
 }
 
 .submit {
@@ -47,16 +50,24 @@ form.textBox{
   position: relative;
   align-items:center;
   width: 30%;
-  height: 30px;
+  height: 45px;
   max-width:100px;
   background-color: var(--quaternary-color);
-  color: black;
+  color: white;
   font-size: 17px;
+  border: 1px solid black;
   border-radius: 5px;
+}
+
+.submit:hover{
+  background:rgb(255,100,100);
+  cursor: pointer;
 }
 
 ::placeholder {
    text-align: center; 
+
+
 }
 
 /* or, for legacy browsers */
@@ -82,14 +93,24 @@ form.textBox{
 
 .show {
   background-color: var(--quaternary-color);
-  color: black;
+  color: white;
+  margin-left: 10px;
   font-size: 17px;
   border-radius: 5px;
+  padding:5px 8px;
+  border: 1px solid black;
 
+}
+
+.show:hover{
+  background:rgb(255,100,100);
+  cursor: pointer;
 }
 
 .dropdown {
   background-color: var(--tertiary-color);
+  padding: 5px 8px;
+  border-radius: 3px;
 }
 
 .clip {
@@ -98,11 +119,14 @@ form.textBox{
   border-width: 2px;
   background-color: var(--tertiary-color);
   min-height: 5ch;
+  width:80%;
+  margin:auto;
 }
 
 .clip button {
   float: right;
 }
+
 
 /*text related styles*/
 #mainHeading{
@@ -165,6 +189,7 @@ p {
     #f3a6af 0%,
     #959bf6 100%
   );
+  color:white;
 }
 
 #switch-2 {
