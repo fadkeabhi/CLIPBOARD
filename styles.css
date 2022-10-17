@@ -130,6 +130,7 @@ form.textBox{
   min-height: 5ch;
 }
 
+
 .created{
   background-color: rgb(208, 247, 247);
   padding: 10px;
@@ -139,6 +140,10 @@ form.textBox{
   font-size: 20px;
   font-weight: 700;
   padding: 10px;
+}
+.clip button {
+  float: right;
+
 }
 
 /*text related styles*/

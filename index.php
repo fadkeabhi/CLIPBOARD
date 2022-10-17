@@ -146,10 +146,14 @@ $limit = $_GET['show-limit'] ?? 5;
         <br>
 
         <script src="./themeswitch.js"></script>
+
         <script>
             function vanish(){
                 document.getElementById("alert").style.display="none";
             }
         </script>
+
+        <script src="./clipboard.js"></script>
+
     </body>
 </html>
