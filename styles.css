@@ -201,7 +201,7 @@ p {
   transition: 0.3s ease-in-out;
 }
 
-#switch-1 {
+#default {
    background: linear-gradient(
     to right,
     #f3a6af 0%,
@@ -209,11 +209,35 @@ p {
   );
 }
 
-#switch-2 {
+#dark {
    background: linear-gradient(
     to right,
     #14172c 0%,
     #c08058 100%
+  );
+}
+
+#deepblue {
+   background: linear-gradient(
+    to right,
+    #192a56 0%,
+    #273c75 100%
+  );
+}
+
+#mint {
+   background: linear-gradient(
+    to right,
+    #10ac84 0%,
+    #1dd1a1 100%
+  );
+}
+
+#owlpurple {
+   background: linear-gradient(
+    to right,
+    #341f97 0%,
+    #5f27cd 100%
   );
 }
 
