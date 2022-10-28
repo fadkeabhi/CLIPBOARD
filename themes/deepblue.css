@@ -1,0 +1,13 @@
+:root {
+    --primary-color: #192a56;   /*  :root can be use to assign color to varibles */
+    --secondary-color: #273c75;
+    --tertiary-color: #40739e;
+    --quaternary-color: #487eb0;
+}
+
+body{color:rgb(255 255 255 / 0.87);}
+
+textarea{color:rgb(255 255 255 / 0.97);}
+textarea::placeholder{color:#121212;}
+.created{color:black;}
+h3{color: #121212;}
