@@ -76,6 +76,7 @@ $limit = $_GET['show-limit'] ?? 5;
                 <div data-theme="deepblue" class="switch" id="deepblue"></div>
                 <div data-theme="mint" class="switch" id="mint"></div>
                 <div data-theme="owlpurple" class="switch" id="owlpurple"></div>
+                <div data-theme="lemon" class="switch" id="lemon"></div>
             </div>
         </header>
 
