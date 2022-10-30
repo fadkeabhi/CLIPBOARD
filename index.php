@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // limit of number of clips displayed
-$limit = $_GET['show-limit'] ?? 5;
+$limit = $_GET['show-limit'] ?? '5';
 ?>
 
 <!doctype html>
