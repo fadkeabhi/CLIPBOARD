@@ -19,20 +19,23 @@ for (var i = 0; i < Object.keys(switches).length; i++) {
 
 function setTheme(theme) {
   switch (theme) {
-    case theme == "default":
+    case "default":
       document.getElementById("theme-switch").href = "./themes/default.css";
       break;
-    case theme == "dark":
+    case "dark":
       document.getElementById("theme-switch").href = "./themes/dark.css";
       break;
-    case theme == "deepblue":
+    case "deepblue":
       document.getElementById("theme-switch").href = "./themes/deepblue.css";
       break;
-    case theme == "owlpurple":
+    case "owlpurple":
       document.getElementById("theme-switch").href = "./themes/owlpurple.css";
       break;
-    case theme == "mint":
+    case "mint":
       document.getElementById("theme-switch").href = "./themes/mint.css";
+      break;
+    case "lemon":
+      document.getElementById("theme-switch").href = "./themes/lemon.css";
       break;
     default:
       document.getElementById("theme-switch").href = "./themes/default.css";
