@@ -8,9 +8,11 @@ if (style == null) {
   setTheme(style);
 }
 
-for (let i of switches) {
-  i.addEventListener('click', function () {
-    let theme = this.dataset.theme;
+for (var i = 0; i < Object.keys(switches).length; i++) {
+  var switchElement = switches[i];
+
+  switchElement.addEventListener("click", function () {
+    var theme = this.dataset.theme;
     setTheme(theme);
   });
 }
