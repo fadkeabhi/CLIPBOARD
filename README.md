@@ -15,12 +15,13 @@
 
 ---
 
-<h2 align="center"> A web based clipboard. V2 is available [here](https://github.com/fadkeabhi/CLIPBOARD-V2)
+<h2 align="center"> A web based clipboard.
     <br> 
 </h2>
 
 
 ## 📝 Table of Contents
+- [New version - V2](#v2)
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Installation](#installation)
@@ -29,11 +30,16 @@
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
+## New Version <a name = "v2"></a>
+> V2 is available [here](https://github.com/fadkeabhi/CLIPBOARD-V2/).
+
+
 ## 🧐 About <a name = "about"></a>
 The simplest method for transmitting data across internet-connected devices
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 > Current preview is available [here](https://djabrj.gq/).
+
 
 ## ⚙️Installation <a name = "installation"></a>
 1. Clone this repository (e.g. `git clone https://github.com/fadkeabhi/CLIPBOARD`)
