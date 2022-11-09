@@ -15,9 +15,10 @@
 
 ---
 
-<h2 align="center"> A web based clipboard.
+<h2 align="center"> A web based clipboard. V2 is available [here](https://github.com/fadkeabhi/CLIPBOARD-V2)
     <br> 
-</>
+</h2>
+
 
 ## 📝 Table of Contents
 - [About](#about)
