@@ -142,7 +142,10 @@ form.textBox{
   padding: 10px;
 }
 .clip button {
+  position:relative;
+  top:0;
   float: right;
+
 
 }
 

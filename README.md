@@ -20,8 +20,8 @@
 </h2>
 
 
+
 ## 📝 Table of Contents
-- [New version - V2](#v2)
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Installation](#installation)
@@ -30,16 +30,11 @@
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
-## New Version <a name = "v2"></a>
-> V2 is available [here](https://github.com/fadkeabhi/CLIPBOARD-V2/).
-
-
 ## 🧐 About <a name = "about"></a>
 The simplest method for transmitting data across internet-connected devices
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 > Current preview is available [here](https://djabrj.gq/).
-
 
 ## ⚙️Installation <a name = "installation"></a>
 1. Clone this repository (e.g. `git clone https://github.com/fadkeabhi/CLIPBOARD`)
@@ -54,12 +49,19 @@ The simplest method for transmitting data across internet-connected devices
 - [PHP](https://www.php.net/) - Server Environment
 - [SQL](https://www.mysql.com/) - Database
 
+
+## 🆕 Whats New (v1.23.3.1) <a name = "new"></a>
+- Added support for API
+- Created new [React based Homepage](react_homepage/index.html)
+
 ## ToDo<a name ="todo"></a> 
 - [x] improve style
 - [x] add limit changer
 - [ ] user login system with private clips
 - [x] add theme switcher
-- [ ] add more themes
+- [x] add more themes
+- [x] Create api support
+- [x] Make React based homepage
 
 ## ✍️ Authors <a name = "authors"></a>
 - [fadkeabhi](https://github.com/fadkeabhi) - Idea & Initial work
