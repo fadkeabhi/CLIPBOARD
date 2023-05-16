@@ -69,6 +69,8 @@ The simplest method for transmitting data across internet-connected devices
 See also the list of [contributors](https://github.com/fadkeabhi/CLIPBOARD/graphs/contributors) who participated in this project.
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+
+ <img src="https://contributors-img.web.app/image?repo=fadkeabhi/CLIPBOARD" alt="Project logo">
 - Hat tip to anyone whose code was used
 
 <br>
