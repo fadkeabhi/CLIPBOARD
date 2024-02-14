@@ -18,12 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $msg = 'Clip must not exceed 1000 characters.';
     // If the data satisfies the condictions,inserting data to database
     } else {
-        $data = htmlspecialchars($data);
+        // $data = htmlspecialchars($data);
 
-        $sql = "INSERT INTO clips (clip) VALUES ('$data')";
+        $stmt = $conn->prepare("INSERT INTO clips (clip) VALUES (?)");
+        $stmt->bind_param('s', $data);
+        
 
         // Displaying success message.
-        if (mysqli_query($conn, $sql)) {
+        if ($stmt->execute()) {
             $msg = '<div id="alert">
             <h3 style="background-color:#f6f2c7; margin-left:5px; padding:6px;">Clip added successfully
             <span style="float:right;text-decoration:underline;color:blue;cursor:pointer;" onclick=vanish()>Close</span>
