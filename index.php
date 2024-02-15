@@ -18,17 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $msg = 'Clip must not exceed 1000 characters.';
     // If the data satisfies the condictions,inserting data to database
     } else {
-        $data = htmlspecialchars($data);
+        // $data = htmlspecialchars($data);
 
-        $sql = "INSERT INTO clips (clip) VALUES ('$data')";
-
-        // Displaying success message.
-        if (mysqli_query($conn, $sql)) {
-            $msg = '';
-
-            $msg = '1';
+        $stmt = $conn->prepare("INSERT INTO clips (clip) VALUES (?)");
+        $stmt->bind_param('s', $data);
         
 
+        // Displaying success message.
+
+        if ($stmt->execute()) {
+            $msg = '1';
             // redirect the user to the same page, but with the msg variable in URL
             // this prevents "double submit" bug on refresh of the page
             $args = array_merge($_GET, [
