@@ -34,7 +34,7 @@
 The simplest method for transmitting data across internet-connected devices
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
-> Current preview is available [here](https://djabrj.gq/).
+> Current preview is available [here](https://cb.pndgit.tech).
 
 ## ⚙️Installation <a name = "installation"></a>
 1. Clone this repository (e.g. `git clone https://github.com/fadkeabhi/CLIPBOARD`)
