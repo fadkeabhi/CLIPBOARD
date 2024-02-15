@@ -24,11 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Displaying success message.
         if (mysqli_query($conn, $sql)) {
-            $msg = '<div id="alert">
-            <h3 style="background-color:#f6f2c7; margin-left:5px; padding:6px;">Clip added successfully
-            <span style="float:right;text-decoration:underline;color:blue;cursor:pointer;" onclick=vanish()>Close</span>
-            </h3>
-            </div>';
+            $msg = '';
+
+            $msg = '1';
         
 
             // redirect the user to the same page, but with the msg variable in URL
@@ -111,7 +109,19 @@ $limit = $_GET['show-limit'] ?? '5';
         </div>
 
         <h4>
-            <?php echo $msg ?>
+            <?php 
+                // Show clip added message 
+                if($msg == '1'){
+                    ?>
+                        <div id="alert">
+                            <h3 style="background-color:#f6f2c7; margin-left:5px; padding:6px;">
+                                Clip added successfully
+                                <span style="float:right;text-decoration:underline;color:blue;cursor:pointer;" onclick=vanish()>Close</span>
+                            </h3>
+                        </div>
+                    <?php
+                }
+            ?>
         </h4>
 
         <?php
