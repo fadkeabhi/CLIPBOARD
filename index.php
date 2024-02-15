@@ -25,14 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
 
         // Displaying success message.
-        if ($stmt->execute()) {
-            $msg = '<div id="alert">
-            <h3 style="background-color:#f6f2c7; margin-left:5px; padding:6px;">Clip added successfully
-            <span style="float:right;text-decoration:underline;color:blue;cursor:pointer;" onclick=vanish()>Close</span>
-            </h3>
-            </div>';
-        
 
+        if ($stmt->execute()) {
+            $msg = '1';
             // redirect the user to the same page, but with the msg variable in URL
             // this prevents "double submit" bug on refresh of the page
             $args = array_merge($_GET, [
@@ -113,7 +108,19 @@ $limit = $_GET['show-limit'] ?? '5';
         </div>
 
         <h4>
-            <?php echo $msg ?>
+            <?php 
+                // Show clip added message 
+                if($msg == '1'){
+                    ?>
+                        <div id="alert">
+                            <h3 style="background-color:#f6f2c7; margin-left:5px; padding:6px;">
+                                Clip added successfully
+                                <span style="float:right;text-decoration:underline;color:blue;cursor:pointer;" onclick=vanish()>Close</span>
+                            </h3>
+                        </div>
+                    <?php
+                }
+            ?>
         </h4>
 
         <?php
