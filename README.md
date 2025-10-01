@@ -1,89 +1,230 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="images/cb.svg" alt="Project logo"></a>
-</p>
+# Clipboard - Collaborative Clipboard Application
 
-<h3 align="center">CLIPBOARD</h3>
+A secure, feature-rich web-based clipboard application built with PHP and MySQL. Create boards, share snippets, and collaborate with your team.
 
-<div align="center">
+## Features
 
-  [![Status](https://img.shields.io/badge/status-active-success.svg)]() 
-  [![GitHub Issues](https://img.shields.io/github/issues/fadkeabhi/CLIPBOARD.svg)](https://github.com/fakedabhi/CLIPBOARD/issues)
-  [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/fadkeabhi/CLIPBOARD.svg)](https://github.com/fakedabhi/CLIPBOARD/pulls)
+### User Management
+- User registration and authentication
+- Secure password hashing with `password_hash()`
+- Session-based authentication
 
-</div>
+### Board Management
+- Create unlimited boards with custom names
+- Automatic URL-friendly suburl generation
+- Three public access levels:
+  - **Private**: No public access
+  - **Public View**: Anyone can view clips
+  - **Public Add**: Anyone can view and add clips
+- Optional password protection for boards
+- Toggle clip editability (read-only mode)
 
----
+### Access Control
+- **Owner**: Full admin access to their boards
+- **Collaborators**: Three permission levels
+  - **View**: Can only view clips
+  - **Edit**: Can view, add, edit, and delete clips
+  - **Admin**: Full access including board settings
+- Smart permission system: checks user-specific roles first, then falls back to public access
+- Temporary password access for protected boards
 
-<h2 align="center"> A web based clipboard.
-    <br> 
-</h2>
+### Clip Management
+- Add, edit, and delete text-based clips
+- Automatic timestamp tracking
+- User attribution for clips
+- Respects board editability settings
+- Clean, readable presentation
 
+## Technology Stack
 
+- **Backend**: PHP 8.1+
+- **Database**: MySQL with PDO (prepared statements)
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Framework**: Bootstrap 5 (responsive design)
+- **Routing**: Front-controller pattern with `.htaccess`
 
-## 📝 Table of Contents
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Installation](#installation)
-- [Built Using](#built_using)
-- [ToDo](#todo)
-- [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
+## File Structure
 
-## 🧐 About <a name = "about"></a>
-The simplest method for transmitting data across internet-connected devices
+```
+CLIPBOARD/
+├── config.php              # Configuration and database credentials
+├── index.php               # Main router (front controller)
+├── .htaccess               # URL rewriting rules
+├── src/
+│   ├── db.php              # PDO database connection
+│   └── functions.php       # Core business logic
+├── templates/
+│   ├── header.php          # HTML header and navigation
+│   ├── footer.php          # HTML footer
+│   ├── home.php            # Homepage
+│   ├── login.php           # Login form
+│   ├── register.php        # Registration form
+│   ├── board.php           # Board view with clips
+│   ├── board_settings.php  # Board settings and collaborators
+│   └── password_prompt.php # Password entry for protected boards
+└── assets/
+    └── style.css           # Custom CSS styles
+```
 
-## 🏁 Getting Started <a name = "getting_started"></a>
-> Current preview is available [here](https://cb.pndgit.tech).
+## Installation
 
-## ⚙️Installation <a name = "installation"></a>
-1. Clone this repository (e.g. `git clone https://github.com/fadkeabhi/CLIPBOARD`)
-2. Copy config.sample.php to config.php (`cp config.sample.php config.php`)
-3. Set up your own database credentials in config.php
-4. Import `clips.sql` into the database (e.g. `mysql -uroot clipboard < clips.sql`)
+### Prerequisites
+- PHP 8.1 or higher
+- MySQL 5.7 or higher
+- Apache web server with mod_rewrite enabled
+- XAMPP, WAMP, or similar local development environment
 
-## ⛏️ Built Using <a name = "built_using"></a>
-- [HTML](https://html.com/) - Frontend
-- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Frontend
-- [JS](https://www.javascript.com/) - Frontend
-- [PHP](https://www.php.net/) - Server Environment
-- [SQL](https://www.mysql.com/) - Database
+### Setup Steps
 
+1. **Clone or Download** this repository to your web server directory 
 
-## 🆕 Whats New (v1.23.3.1) <a name = "new"></a>
-- Added support for API
-- Created new [React based Homepage](react_homepage/index.html)
+2. **Create Database**
+   - Open phpMyAdmin or MySQL command line
+   - Create a new database: `clipboard_db`
+   - Import the database schema from `database.sql`
 
-## ToDo<a name ="todo"></a> 
-- [x] improve style
-- [x] add limit changer
-- [ ] user login system with private clips
-- [x] add theme switcher
-- [x] add more themes
-- [x] Create api support
-- [x] Make React based homepage
+3. **Configure Database Connection**
+   - Open `config.php`
+   - Update the database credentials:
+     ```php
+     define('DB_HOST', 'localhost');
+     define('DB_NAME', 'clipboard_db');
+     define('DB_USER', 'root');
+     define('DB_PASS', '');
+     ```
 
-## ✍️ Authors <a name = "authors"></a>
-- [fadkeabhi](https://github.com/fadkeabhi) - Idea & Initial work
+4. **Update Site URL**
+   - In `config.php`, update the `SITE_URL` constant to match your setup:
+     ```php
+     define('SITE_URL', 'http://localhost/CLIPBOARD');
+     ```
 
-See also the list of [contributors](https://github.com/fadkeabhi/CLIPBOARD/graphs/contributors) who participated in this project.
+5. **Verify .htaccess**
+   - Ensure `RewriteBase` in `.htaccess` matches your directory:
+     ```apache
+     RewriteBase /CLIPBOARD/
+     ```
 
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+6. **Set Permissions** (Linux/Mac)
+   ```bash
+   chmod 755 CLIPBOARD/
+   chmod 644 CLIPBOARD/*.php
+   ```
 
- <img src="https://contributors-img.web.app/image?repo=fadkeabhi/CLIPBOARD" alt="Project logo">
-- Hat tip to anyone whose code was used
+7. **Enable mod_rewrite** (Apache)
+   - Make sure `mod_rewrite` is enabled in Apache
+   - For XAMPP, it's usually enabled by default
 
-<br>
-<br>
+8. **Access the Application**
+   - Open your browser and navigate to: `http://localhost/CLIPBOARD`
 
-<div align="center"  class="icons-social" style="margin-left: 10px;">
- <h3> <b>All Contributions are appreciated </b> </h3>
- <br>
- <a   target="_blank" href="https://hacktoberfest.com">
-			<img src="images/hacktober.svg"  height="40" ></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a style="margin-left: 10px;" target="_blank" href="https://github.com/fadkeabhi/CLIPBOARD">
-		<img src="images/github.svg" height="40"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a style="margin-left: 10px;" target="_blank" href="">
-			<img src="images/discord.svg" height="40"
-            width ="40"></a>
-      </div>
+## Usage Guide
+
+### Getting Started
+
+1. **Register an Account**
+   - Click "Register" in the navigation
+   - Enter username, email, and password (min 6 characters)
+   - You'll be redirected to login
+
+2. **Create a Board**
+   - After logging in, use the "Create New Board" form
+   - Set a name, choose access level, and optionally add a password
+   - Click "Create Board"
+
+3. **Share Your Board**
+   - Copy the board URL (e.g., `http://localhost/CLIPBOARD/b/my-board`)
+   - Share with collaborators
+
+### Managing Boards
+
+#### Board Settings
+- Click "Board Settings" button on your board
+- Update name, access level, editability, or password
+- Add/remove collaborators with specific permissions
+- Delete the board (danger zone)
+
+#### Access Levels Explained
+
+- **Private**: Only you and invited collaborators can access
+- **Public View**: Anyone with the link can view clips
+- **Public Add**: Anyone with the link can view and add clips
+
+#### Password Protection
+
+- Set a password in board settings for private boards
+- Visitors must enter the password to gain temporary view access
+- Great for sharing with non-registered users securely
+
+### Working with Clips
+
+#### Adding Clips
+- If you have edit permission, use the "Add New Clip" form
+- Enter your text content
+- Click "Add Clip"
+
+#### Editing Clips
+- Click "Edit" button on any clip (if you have permission)
+- Modify the content
+- Click "Save"
+
+#### Deleting Clips
+- Click "Delete" button on any clip (if you have permission)
+- Confirm the deletion
+
+### Collaborating
+
+1. **As Board Owner/Admin**:
+   - Go to Board Settings
+   - Select a user from the dropdown
+   - Choose permission level (View, Edit, or Admin)
+   - Click "Add"
+
+2. **Permission Levels**:
+   - **View**: Can see all clips but cannot add/edit/delete
+   - **Edit**: Can add new clips and edit/delete existing ones (respects board's editable flag)
+   - **Admin**: Can do everything including manage board settings
+
+## Security Features
+
+- **SQL Injection Protection**: All queries use PDO prepared statements
+- **XSS Prevention**: All output is escaped with `htmlspecialchars()`
+- **Password Security**: Passwords hashed with `password_hash()` (bcrypt)
+- **Session Security**: HTTP-only cookies, secure session handling
+- **CSRF Protection**: Consider adding CSRF tokens for production use
+- **Permission Checks**: Every action validates user permissions
+
+## Production Deployment
+
+Before deploying to production:
+
+1. **Update Configuration**
+   - Set proper database credentials
+   - Update `SITE_URL` to your domain
+   - Enable HTTPS and set `session.cookie_secure` to 1
+
+2. **Disable Error Display**
+   ```php
+   error_reporting(0);
+   ini_set('display_errors', 0);
+   ```
+
+3. **Enable Error Logging**
+   - Configure PHP to log errors to a file
+   - Monitor logs regularly
+
+4. **Add CSRF Protection**
+   - Implement CSRF tokens for all forms
+   - Validate tokens on POST requests
+
+5. **Set Up Backups**
+   - Regular database backups
+   - File backups
+
+6. **Use HTTPS**
+   - Install SSL certificate
+   - Force HTTPS in `.htaccess`
+
+7. **Security Headers**
+   - Add security headers in Apache config or PHP
+   - Content-Security-Policy, X-Frame-Options, etc.
