@@ -1,172 +1,336 @@
 <?php
 /**
- * @var $conn mysqli
+ * Front Controller / Router
+ * 
+ * This file handles all incoming requests and routes them to appropriate handlers.
  */
-include __DIR__ . '/db.php';
 
-$msg = $_GET['msg'] ?? ' ';
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/src/functions.php';
 
-// Retrieving data from the server
+// Get the URL from the query string
+$url = $_GET['url'] ?? '';
+$url = rtrim($url, '/');
+$url = filter_var($url, FILTER_SANITIZE_URL);
+$urlParts = $url ? explode('/', $url) : [];
+
+// ============================================================================
+// HANDLE POST REQUESTS
+// ============================================================================
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = $_POST['data'];
-
-    // If the retrieved data is empty.
-    if (empty($data)) {
-        $msg = 'Clip is empty.';
-    // If the retrieved data exceeds 1000 characters
-    } elseif (strlen($data) > 1000) {
-        $msg = 'Clip must not exceed 1000 characters.';
-    // If the data satisfies the condictions,inserting data to database
-    } else {
-        // $data = htmlspecialchars($data);
-
-        $stmt = $conn->prepare("INSERT INTO clips (clip) VALUES (?)");
-        $stmt->bind_param('s', $data);
-        
-
-        // Displaying success message.
-
-        if ($stmt->execute()) {
-            $msg = '1';
-            // redirect the user to the same page, but with the msg variable in URL
-            // this prevents "double submit" bug on refresh of the page
-            $args = array_merge($_GET, [
-                'msg' => $msg
-            ]);
-            $redirect_url = $_SERVER['PHP_SELF'] . '?' . http_build_query($args);
-            header("Location: $redirect_url", true, 303);
-            exit;
-        } else {
-            $msg = "Error: $sql<br>" . mysqli_error($conn);
-        }
+    $action = $_POST['action'] ?? '';
+    
+    switch ($action) {
+        case 'register':
+            $result = registerUser($_POST['username'] ?? '', $_POST['email'] ?? '', $_POST['password'] ?? '');
+            $_SESSION['message'] = $result['message'];
+            $_SESSION['message_type'] = $result['success'] ? 'success' : 'danger';
+            if ($result['success']) {
+                redirect(SITE_URL . '/login');
+            } else {
+                redirect(SITE_URL . '/register');
+            }
+            break;
+            
+        case 'login':
+            $result = loginUser($_POST['username'] ?? '', $_POST['password'] ?? '');
+            $_SESSION['message'] = $result['message'];
+            $_SESSION['message_type'] = $result['success'] ? 'success' : 'danger';
+            if ($result['success']) {
+                redirect(SITE_URL . '/');
+            } else {
+                redirect(SITE_URL . '/login');
+            }
+            break;
+            
+        case 'logout':
+            logoutUser();
+            redirect(SITE_URL . '/');
+            break;
+            
+        case 'create_board':
+            if (!isLoggedIn()) {
+                redirect(SITE_URL . '/login');
+            }
+            $result = createBoard(
+                getCurrentUserId(),
+                $_POST['name'] ?? '',
+                $_POST['default_access'] ?? 'private',
+                isset($_POST['is_editable']),
+                $_POST['password'] ?? null
+            );
+            $_SESSION['message'] = $result['message'];
+            $_SESSION['message_type'] = $result['success'] ? 'success' : 'danger';
+            if ($result['success']) {
+                redirect(SITE_URL . '/b/' . $result['suburl']);
+            } else {
+                redirect(SITE_URL . '/');
+            }
+            break;
+            
+        case 'add_clip':
+            $boardId = $_POST['board_id'] ?? 0;
+            $board = getBoardById($boardId);
+            
+            if (!$board || !canEditBoard(getCurrentUserId(), $board)) {
+                $_SESSION['message'] = 'You do not have permission to add clips.';
+                $_SESSION['message_type'] = 'danger';
+                redirect(SITE_URL . '/');
+                break;
+            }
+            
+            $result = addClip($boardId, getCurrentUserId(), $_POST['content'] ?? '');
+            $_SESSION['message'] = $result['message'];
+            $_SESSION['message_type'] = $result['success'] ? 'success' : 'danger';
+            redirect(SITE_URL . '/b/' . $board['suburl']);
+            break;
+            
+        case 'edit_clip':
+            $clipId = $_POST['clip_id'] ?? 0;
+            $clip = getClipById($clipId);
+            
+            if (!$clip) {
+                $_SESSION['message'] = 'Clip not found.';
+                $_SESSION['message_type'] = 'danger';
+                redirect(SITE_URL . '/');
+                break;
+            }
+            
+            $board = getBoardById($clip['board_id']);
+            
+            if (!canEditClip(getCurrentUserId(), $board, $clip)) {
+                $_SESSION['message'] = 'You do not have permission to edit this clip.';
+                $_SESSION['message_type'] = 'danger';
+                redirect(SITE_URL . '/b/' . $board['suburl']);
+                break;
+            }
+            
+            $result = updateClip($clipId, $_POST['content'] ?? '');
+            $_SESSION['message'] = $result['message'];
+            $_SESSION['message_type'] = $result['success'] ? 'success' : 'danger';
+            redirect(SITE_URL . '/b/' . $board['suburl']);
+            break;
+            
+        case 'delete_clip':
+            $clipId = $_POST['clip_id'] ?? 0;
+            $clip = getClipById($clipId);
+            
+            if (!$clip) {
+                $_SESSION['message'] = 'Clip not found.';
+                $_SESSION['message_type'] = 'danger';
+                redirect(SITE_URL . '/');
+                break;
+            }
+            
+            $board = getBoardById($clip['board_id']);
+            
+            if (!canEditClip(getCurrentUserId(), $board, $clip)) {
+                $_SESSION['message'] = 'You do not have permission to delete this clip.';
+                $_SESSION['message_type'] = 'danger';
+                redirect(SITE_URL . '/b/' . $board['suburl']);
+                break;
+            }
+            
+            deleteClip($clipId);
+            $_SESSION['message'] = 'Clip deleted successfully!';
+            $_SESSION['message_type'] = 'success';
+            redirect(SITE_URL . '/b/' . $board['suburl']);
+            break;
+            
+        case 'verify_password':
+            $boardId = $_POST['board_id'] ?? 0;
+            $board = getBoardById($boardId);
+            
+            if (!$board) {
+                redirect(SITE_URL . '/');
+                break;
+            }
+            
+            if (verifyBoardPassword($board, $_POST['password'] ?? '')) {
+                redirect(SITE_URL . '/b/' . $board['suburl']);
+            } else {
+                $_SESSION['message'] = 'Incorrect password.';
+                $_SESSION['message_type'] = 'danger';
+                redirect(SITE_URL . '/b/' . $board['suburl']);
+            }
+            break;
+            
+        case 'update_board_settings':
+            $boardId = $_POST['board_id'] ?? 0;
+            $board = getBoardById($boardId);
+            
+            if (!$board || !isBoardAdmin(getCurrentUserId(), $board)) {
+                $_SESSION['message'] = 'You do not have permission to edit board settings.';
+                $_SESSION['message_type'] = 'danger';
+                redirect(SITE_URL . '/');
+                break;
+            }
+            
+            $settings = [
+                'name' => $_POST['name'] ?? $board['name'],
+                'default_access' => $_POST['default_access'] ?? $board['default_access'],
+                'is_editable' => isset($_POST['is_editable'])
+            ];
+            
+            if (isset($_POST['password'])) {
+                $settings['password'] = $_POST['password'];
+            }
+            
+            $result = updateBoardSettings($boardId, $settings);
+            $_SESSION['message'] = $result['message'];
+            $_SESSION['message_type'] = $result['success'] ? 'success' : 'danger';
+            redirect(SITE_URL . '/b/' . $board['suburl'] . '/settings');
+            break;
+            
+        case 'add_collaborator':
+            $boardId = $_POST['board_id'] ?? 0;
+            $board = getBoardById($boardId);
+            
+            if (!$board || !isBoardAdmin(getCurrentUserId(), $board)) {
+                $_SESSION['message'] = 'You do not have permission to add collaborators.';
+                $_SESSION['message_type'] = 'danger';
+                redirect(SITE_URL . '/');
+                break;
+            }
+            
+            $userId = $_POST['user_id'] ?? 0;
+            $permissionLevel = $_POST['permission_level'] ?? 'view';
+            
+            $result = setBoardPermission($boardId, $userId, $permissionLevel);
+            $_SESSION['message'] = $result['message'];
+            $_SESSION['message_type'] = $result['success'] ? 'success' : 'danger';
+            redirect(SITE_URL . '/b/' . $board['suburl'] . '/settings');
+            break;
+            
+        case 'remove_collaborator':
+            $boardId = $_POST['board_id'] ?? 0;
+            $board = getBoardById($boardId);
+            
+            if (!$board || !isBoardAdmin(getCurrentUserId(), $board)) {
+                $_SESSION['message'] = 'You do not have permission to remove collaborators.';
+                $_SESSION['message_type'] = 'danger';
+                redirect(SITE_URL . '/');
+                break;
+            }
+            
+            $userId = $_POST['user_id'] ?? 0;
+            removeBoardPermission($boardId, $userId);
+            
+            $_SESSION['message'] = 'Collaborator removed successfully!';
+            $_SESSION['message_type'] = 'success';
+            redirect(SITE_URL . '/b/' . $board['suburl'] . '/settings');
+            break;
+            
+        case 'delete_board':
+            $boardId = $_POST['board_id'] ?? 0;
+            $board = getBoardById($boardId);
+            
+            if (!$board || !isBoardAdmin(getCurrentUserId(), $board)) {
+                $_SESSION['message'] = 'You do not have permission to delete this board.';
+                $_SESSION['message_type'] = 'danger';
+                redirect(SITE_URL . '/');
+                break;
+            }
+            
+            deleteBoard($boardId);
+            $_SESSION['message'] = 'Board deleted successfully!';
+            $_SESSION['message_type'] = 'success';
+            redirect(SITE_URL . '/');
+            break;
     }
 }
 
-// limit of number of clips displayed
-$limit = $_GET['show-limit'] ?? '5';
-?>
+// ============================================================================
+// ROUTE REQUESTS
+// ============================================================================
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>
-            MY CLIPBOARD
-        </title>
-        <link rel="icon" href="/images/clipboard2.ico">
+// Home page
+if (empty($url)) {
+    $userBoards = isLoggedIn() ? getUserBoards(getCurrentUserId()) : [];
+    include __DIR__ . '/templates/header.php';
+    include __DIR__ . '/templates/home.php';
+    include __DIR__ . '/templates/footer.php';
+    exit;
+}
 
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" id="theme-switch" href="">
-    </head>
+// Login page
+if ($url === 'login') {
+    if (isLoggedIn()) {
+        redirect(SITE_URL . '/');
+    }
+    include __DIR__ . '/templates/header.php';
+    include __DIR__ . '/templates/login.php';
+    include __DIR__ . '/templates/footer.php';
+    exit;
+}
 
-    <body>
-        <h1 id="mainHeading">
-            CLIPBOARD
-        </h1>
+// Register page
+if ($url === 'register') {
+    if (isLoggedIn()) {
+        redirect(SITE_URL . '/');
+    }
+    include __DIR__ . '/templates/header.php';
+    include __DIR__ . '/templates/register.php';
+    include __DIR__ . '/templates/footer.php';
+    exit;
+}
 
-        <header>
-            <div class="theme-switches">
-                <div data-theme="default" class="switch" id="default"></div>
-                <div data-theme="dark" class="switch" id="dark"></div>
-                <div data-theme="deepblue" class="switch" id="deepblue"></div>
-                <div data-theme="mint" class="switch" id="mint"></div>
-                <div data-theme="owlpurple" class="switch" id="owlpurple"></div>
-                <div data-theme="lemon" class="switch" id="lemon"></div>
-            </div>
-        </header>
-
-        <h2>
-            MAKE NEW CLIP
-        </h2>
-        <div class="container">
-            <form action="" name="submit" method="post" class="textBox">
-                <textarea class="text-area" name="data" rows="8" cols="45" placeholder="Add Clip Content"></textarea>
-                <input class="submit" type="submit" value="Submit">
-            </form>
-        </div>
-
-        <h2>
-            LATEST CLIPS
-        </h2>
-        <div class="container">
-            <form action="" name="filter" method="GET">
-                <label for="show-limit">Clips to show :</label>
-
-                <select class="dropdown" name="show-limit" id="show-limit">
-                    <option value="5" <?= $limit === '5' ? 'selected' : ''?>>5</option>
-                    <option value="10" <?= $limit === '10' ? 'selected' : ''?>>10</option>
-                    <option value="20" <?= $limit === '20' ? 'selected' : ''?>>20</option>
-                    <option value="50" <?= $limit === '50' ? 'selected' : ''?>>50</option>
-                    <option value="100" <?= $limit === '100' ? 'selected' : ''?>>100</option>
-                    <option value="all" <?= $limit === 'all' ? 'selected' : ''?>>All</option>
-                </select>
-
-                <button class="show" type="submit">Show</button>
-            </form>
-        </div>
-
-        <h4>
-            <?php 
-                // Show clip added message 
-                if($msg == '1'){
-                    ?>
-                        <div id="alert">
-                            <h3 style="background-color:#f6f2c7; margin-left:5px; padding:6px;">
-                                Clip added successfully
-                                <span style="float:right;text-decoration:underline;color:blue;cursor:pointer;" onclick=vanish()>Close</span>
-                            </h3>
-                        </div>
-                    <?php
-                }
-            ?>
-        </h4>
-
-        <?php
-        // showing recent clips
-        if (in_array($limit, ['5', '10', '20', '50', '100'], true)) {
-            $sql = "SELECT clip, created_at FROM clips ORDER BY id DESC LIMIT $limit";
-        } else {
-            $sql = "SELECT clip, created_at FROM clips ORDER BY id DESC";
+// Board routes: /b/{suburl} or /b/{suburl}/settings
+if ($urlParts[0] === 'b' && isset($urlParts[1])) {
+    $suburl = $urlParts[1];
+    $board = getBoardBySuburl($suburl);
+    
+    if (!$board) {
+        $_SESSION['message'] = 'Board not found.';
+        $_SESSION['message_type'] = 'danger';
+        redirect(SITE_URL . '/');
+    }
+    
+    $userPermission = getUserPermission(getCurrentUserId(), $board);
+    
+    // Check if user needs to enter password
+    if (!canViewBoard(getCurrentUserId(), $board) && !empty($board['password_hash'])) {
+        include __DIR__ . '/templates/header.php';
+        include __DIR__ . '/templates/password_prompt.php';
+        include __DIR__ . '/templates/footer.php';
+        exit;
+    }
+    
+    // Check if user has view permission
+    if (!canViewBoard(getCurrentUserId(), $board)) {
+        $_SESSION['message'] = 'You do not have permission to view this board.';
+        $_SESSION['message_type'] = 'danger';
+        redirect(SITE_URL . '/');
+    }
+    
+    // Board settings page
+    if (isset($urlParts[2]) && $urlParts[2] === 'settings') {
+        if (!isBoardAdmin(getCurrentUserId(), $board)) {
+            $_SESSION['message'] = 'You do not have permission to access board settings.';
+            $_SESSION['message_type'] = 'danger';
+            redirect(SITE_URL . '/b/' . $board['suburl']);
         }
+        
+        $collaborators = getBoardCollaborators($board['id']);
+        $allUsers = searchUsers();
+        
+        include __DIR__ . '/templates/header.php';
+        include __DIR__ . '/templates/board_settings.php';
+        include __DIR__ . '/templates/footer.php';
+        exit;
+    }
+    
+    // Board view page
+    $clips = getBoardClips($board['id']);
+    
+    include __DIR__ . '/templates/header.php';
+    include __DIR__ . '/templates/board.php';
+    include __DIR__ . '/templates/footer.php';
+    exit;
+}
 
-        $result = mysqli_query($conn, $sql);
-        $i = 1;
-        ?>
-
-        <?php if (mysqli_num_rows($result) > 0): ?>
-            <?php
-            $i = 0;
-            // output data of each row
-            while ($row = mysqli_fetch_assoc($result)):
-            ?>
-                <div class="clip">
-                    <br>
-                    <p id="created_at<?= $i ?>" class="created">Created at :<?= $row["created_at"] ?></p>
-                    
-                    <p id="clip<?= $i ?>" class="clips"><?= $row["clip"] ?></p>
-                    <br>
-                </div>
-                <br>
-
-                <?php // echo '<a href="#" onclick="CopyToClipboard(#clip' . $i . ');return false;">📄</a><br>'; ?>
-                <?php $i++; ?>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <p>0 results</p>
-        <?php endif; ?>
-        <br>
-
-        <script src="./themeswitch.js"></script>
-
-        <script>
-            function vanish(){
-                document.getElementById("alert").style.display="none";
-            }
-        </script>
-
-        <script src="./clipboard.js"></script>
-
-    </body>
-</html>
+// 404 - Page not found
+$_SESSION['message'] = 'Page not found.';
+$_SESSION['message_type'] = 'danger';
+redirect(SITE_URL . '/');
