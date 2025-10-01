@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /CLIPBOARD/
+
+# Redirect to index.php if not a file or directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
