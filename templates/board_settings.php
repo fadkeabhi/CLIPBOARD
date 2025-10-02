@@ -48,15 +48,34 @@
                     
                     <div class="mb-3">
                         <label for="password" class="form-label">Password Protection</label>
+                        <?php if ($board['password_hash']): ?>
+                            <div class="alert alert-info d-flex justify-content-between align-items-center">
+                                <span>
+                                    <strong>Status:</strong> Password protection is currently <strong>enabled</strong>.
+                                </span>
+                            </div>
+                        <?php else: ?>
+                            <div class="alert alert-secondary">
+                                <strong>Status:</strong> No password protection set.
+                            </div>
+                        <?php endif; ?>
                         <input type="password" class="form-control" id="password" name="password" 
-                            placeholder="<?= $board['password_hash'] ? 'Leave blank to keep current password' : 'Leave blank for no password' ?>">
+                            placeholder="<?= $board['password_hash'] ? 'Enter new password to change it' : 'Enter password to enable protection' ?>">
                         <div class="form-text">
                             <?php if ($board['password_hash']): ?>
-                                Current: Password is set. Enter a new password to change it, or leave blank to keep current.
+                                Enter a new password to change it, or leave blank to keep the current password.
                             <?php else: ?>
-                                No password currently set. Enter a password to protect this board.
+                                Enter a password to enable password protection for this board.
                             <?php endif; ?>
                         </div>
+                        <?php if ($board['password_hash']): ?>
+                            <div class="form-check mt-2">
+                                <input type="checkbox" class="form-check-input" id="remove_password" name="remove_password" value="1">
+                                <label class="form-check-label text-danger" for="remove_password">
+                                    <strong>Remove password protection</strong> (board will no longer require a password)
+                                </label>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     
                     <button type="submit" class="btn btn-primary">Update Settings</button>
@@ -156,3 +175,24 @@
         </div>
     </div>
 </div>
+
+<script>
+// Handle password removal checkbox interaction
+document.addEventListener('DOMContentLoaded', function() {
+    const removePasswordCheckbox = document.getElementById('remove_password');
+    const passwordInput = document.getElementById('password');
+    
+    if (removePasswordCheckbox && passwordInput) {
+        removePasswordCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                passwordInput.value = '';
+                passwordInput.disabled = true;
+                passwordInput.placeholder = 'Password will be removed';
+            } else {
+                passwordInput.disabled = false;
+                passwordInput.placeholder = 'Enter new password to change it';
+            }
+        });
+    }
+});
+</script>

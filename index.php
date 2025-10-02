@@ -172,13 +172,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'default_access' => $_POST['default_access'] ?? $board['default_access'],
                 'is_editable' => isset($_POST['is_editable'])
             ];
+
+            $passwordRemoved = false;
             
-            if (isset($_POST['password'])) {
+            // Handle password updates
+            if (isset($_POST['remove_password']) && $_POST['remove_password'] == '1') {
+                // Admin wants to remove password protection
+                $settings['password'] = '';
+                $passwordRemoved = true;
+            } elseif (isset($_POST['password']) && !empty($_POST['password'])) {
+                // Admin wants to set/change password
                 $settings['password'] = $_POST['password'];
             }
+            // If neither condition is met, password remains unchanged
             
             $result = updateBoardSettings($boardId, $settings);
-            $_SESSION['message'] = $result['message'];
+            
+            // Customize message if password was removed
+            if ($result['success'] && $passwordRemoved) {
+                $_SESSION['message'] = 'Board settings updated successfully! Password protection has been removed.';
+            } else {
+                $_SESSION['message'] = $result['message'];
+            }
+
             $_SESSION['message_type'] = $result['success'] ? 'success' : 'danger';
             redirect(SITE_URL . '/b/' . $board['suburl'] . '/settings');
             break;

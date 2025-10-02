@@ -256,6 +256,10 @@ function updateBoardSettings($boardId, $settings) {
     if (isset($settings['password'])) {
         if (empty($settings['password'])) {
             $fields[] = "password_hash = NULL";
+            // Clear any session-based password access for this board
+            if (isset($_SESSION['board_password_access'][$boardId])) {
+                unset($_SESSION['board_password_access'][$boardId]);
+            }
         } else {
             $fields[] = "password_hash = ?";
             $params[] = password_hash($settings['password'], PASSWORD_DEFAULT);
