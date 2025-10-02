@@ -152,9 +152,11 @@ CLIPBOARD/
 
 #### Password Protection
 
-- Set a password in board settings for private boards
-- Visitors must enter the password to gain temporary view access
-- Great for sharing with non-registered users securely
+- **Set a Password**: In board settings, enter a password to protect your board
+- **Change Password**: Enter a new password to update the existing one
+- **Remove Password**: Check the "Remove password protection" checkbox to disable password protection entirely
+- **How it Works**: Visitors must enter the password to gain temporary view access
+- **Use Case**: Great for sharing with non-registered users securely
 
 ### Working with Clips
 
