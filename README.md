@@ -175,7 +175,6 @@ CLIPBOARD/
 - Confirm the deletion
 
 ### Collaborating
-
 1. **As Board Owner/Admin**:
    - Go to Board Settings
    - Select a user from the dropdown

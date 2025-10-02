@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'default_access' => $_POST['default_access'] ?? $board['default_access'],
                 'is_editable' => isset($_POST['is_editable'])
             ];
-            
+
             $passwordRemoved = false;
             
             // Handle password updates
@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 $_SESSION['message'] = $result['message'];
             }
-            
+
             $_SESSION['message_type'] = $result['success'] ? 'success' : 'danger';
             redirect(SITE_URL . '/b/' . $board['suburl'] . '/settings');
             break;
