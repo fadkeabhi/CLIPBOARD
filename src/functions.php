@@ -124,6 +124,61 @@ function getCurrentUserId() {
     return $_SESSION['user_id'] ?? null;
 }
 
+/**
+ * Get user by ID
+ *
+ * @param int $userId
+ * @return array|null
+ */
+function getUserById($userId) {
+    $pdo = getDB();
+    $stmt = $pdo->prepare("SELECT id, username, email, created_at FROM users WHERE id = ?");
+    $stmt->execute([$userId]);
+    return $stmt->fetch();
+}
+
+/**
+ * Change user's password
+ *
+ * @param int $userId
+ * @param string $currentPassword
+ * @param string $newPassword
+ * @return array ['success' => bool, 'message' => string]
+ */
+function changeUserPassword($userId, $currentPassword, $newPassword) {
+    $pdo = getDB();
+
+    if (empty($currentPassword) || empty($newPassword)) {
+        return ['success' => false, 'message' => 'All fields are required.'];
+    }
+
+    if (strlen($newPassword) < 6) {
+        return ['success' => false, 'message' => 'New password must be at least 6 characters.'];
+    }
+
+    try {
+        $stmt = $pdo->prepare("SELECT password_hash FROM users WHERE id = ?");
+        $stmt->execute([$userId]);
+        $user = $stmt->fetch();
+
+        if (!$user) {
+            return ['success' => false, 'message' => 'User not found.'];
+        }
+
+        if (!password_verify($currentPassword, $user['password_hash'])) {
+            return ['success' => false, 'message' => 'Current password is incorrect.'];
+        }
+
+        $newHash = password_hash($newPassword, PASSWORD_DEFAULT);
+        $update = $pdo->prepare("UPDATE users SET password_hash = ? WHERE id = ?");
+        $update->execute([$newHash, $userId]);
+
+        return ['success' => true, 'message' => 'Password changed successfully.'];
+    } catch (PDOException $e) {
+        return ['success' => false, 'message' => 'Failed to change password: ' . $e->getMessage()];
+    }
+}
+
 // ============================================================================
 // BOARD MANAGEMENT FUNCTIONS
 // ============================================================================
