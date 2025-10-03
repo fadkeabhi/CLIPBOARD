@@ -21,7 +21,9 @@
                     </li>
                     <?php if (isLoggedIn()): ?>
                         <li class="nav-item">
-                            <span class="nav-link">Hello, <?= e($_SESSION['username']) ?></span>
+                            <a class="nav-link" href="<?= SITE_URL ?>/profile">
+                                Hello, <?= e($_SESSION['username']) ?>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <form method="POST" action="<?= SITE_URL ?>/" class="d-inline">

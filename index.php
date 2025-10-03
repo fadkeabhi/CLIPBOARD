@@ -254,6 +254,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['message_type'] = 'success';
             redirect(SITE_URL . '/');
             break;
+
+        case 'change_password':
+            if (!isLoggedIn()) {
+                redirect(SITE_URL . '/login');
+            }
+
+            $current = $_POST['current_password'] ?? '';
+            $new = $_POST['new_password'] ?? '';
+            $confirm = $_POST['confirm_password'] ?? '';
+
+            if ($new !== $confirm) {
+                $_SESSION['message'] = 'New password and confirmation do not match.';
+                $_SESSION['message_type'] = 'danger';
+                redirect(SITE_URL . '/profile');
+            }
+
+            $result = changeUserPassword(getCurrentUserId(), $current, $new);
+            $_SESSION['message'] = $result['message'];
+            $_SESSION['message_type'] = $result['success'] ? 'success' : 'danger';
+            redirect(SITE_URL . '/profile');
+            break;
     }
 }
 
@@ -277,6 +298,17 @@ if ($url === 'login') {
     }
     include __DIR__ . '/templates/header.php';
     include __DIR__ . '/templates/login.php';
+    include __DIR__ . '/templates/footer.php';
+    exit;
+}
+
+// Profile page
+if ($url === 'profile') {
+    if (!isLoggedIn()) {
+        redirect(SITE_URL . '/login');
+    }
+    include __DIR__ . '/templates/header.php';
+    include __DIR__ . '/templates/profile.php';
     include __DIR__ . '/templates/footer.php';
     exit;
 }
