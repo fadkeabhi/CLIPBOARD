@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `boards` (
   `name` varchar(100) NOT NULL,
   `suburl` varchar(100) NOT NULL,
   `default_access` enum('private','public_view','public_add') NOT NULL DEFAULT 'private',
+  `list_publically` tinyint(1) NOT NULL DEFAULT 0,
   `is_editable` tinyint(1) NOT NULL DEFAULT 1,
   `password_hash` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
