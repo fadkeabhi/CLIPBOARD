@@ -193,7 +193,7 @@ function changeUserPassword($userId, $currentPassword, $newPassword) {
  * @param string|null $password
  * @return array ['success' => bool, 'message' => string, 'suburl' => string|null]
  */
-function createBoard($ownerId, $name, $defaultAccess = 'private', $isEditable = true, $password = null) {
+function createBoard($ownerId, $name, $defaultAccess = 'private', $isEditable = true, $password = null, $listPublically = false) {
     $pdo = getDB();
     
     if (empty($name)) {
@@ -213,13 +213,20 @@ function createBoard($ownerId, $name, $defaultAccess = 'private', $isEditable = 
     
     // Hash password if provided
     $passwordHash = $password ? password_hash($password, PASSWORD_DEFAULT) : null;
+    // If board is private, it cannot be publicly listed
+    if ($defaultAccess === 'private') {
+        $listPublically = 0;
+    } else {
+        // Normalize list_publically to integer
+        $listPublically = $listPublically ? 1 : 0;
+    }
     
     try {
         $stmt = $pdo->prepare("
-            INSERT INTO boards (owner_id, name, suburl, default_access, is_editable, password_hash) 
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO boards (owner_id, name, suburl, default_access, list_publically, is_editable, password_hash) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         ");
-        $stmt->execute([$ownerId, $name, $suburl, $defaultAccess, $isEditable ? 1 : 0, $passwordHash]);
+    $stmt->execute([$ownerId, $name, $suburl, $defaultAccess, $listPublically, $isEditable ? 1 : 0, $passwordHash]);
         
         return ['success' => true, 'message' => 'Board created successfully!', 'suburl' => $suburl];
     } catch (PDOException $e) {
@@ -307,6 +314,30 @@ function updateBoardSettings($boardId, $settings) {
         $fields[] = "is_editable = ?";
         $params[] = $settings['is_editable'] ? 1 : 0;
     }
+
+    if (isset($settings['list_publically'])) {
+        // Requested value normalized
+        $wantsList = $settings['list_publically'] ? 1 : 0;
+
+        // Determine effective default access: prefer provided new value, otherwise fetch current from DB
+        if (isset($settings['default_access'])) {
+            $effectiveAccess = $settings['default_access'];
+        } else {
+            // fetch current default_access from DB
+            $stmtAcc = $pdo->prepare("SELECT default_access FROM boards WHERE id = ?");
+            $stmtAcc->execute([$boardId]);
+            $row = $stmtAcc->fetch();
+            $effectiveAccess = $row['default_access'] ?? 'private';
+        }
+
+        // If effective access is private, force no listing
+        if ($effectiveAccess === 'private') {
+            $wantsList = 0;
+        }
+
+        $fields[] = "list_publically = ?";
+        $params[] = $wantsList;
+    }
     
     if (isset($settings['password'])) {
         if (empty($settings['password'])) {
@@ -336,6 +367,36 @@ function updateBoardSettings($boardId, $settings) {
     } catch (PDOException $e) {
         return ['success' => false, 'message' => 'Failed to update settings: ' . $e->getMessage()];
     }
+}
+
+
+/**
+ * Get public boards optionally filtered by search text and access type
+ *
+ * @param string|null $search
+ * @param string|null $type one of 'private','public_view','public_add' or null for any
+ * @return array
+ */
+function getPublicBoards($search = null, $type = null) {
+    $pdo = getDB();
+    $sql = "SELECT * FROM boards WHERE list_publically = 1";
+    $params = [];
+
+    if ($type) {
+        $sql .= " AND default_access = ?";
+        $params[] = $type;
+    }
+
+    if ($search) {
+        $sql .= " AND (name LIKE ? OR suburl LIKE ?)";
+        $params[] = "%" . $search . "%";
+        $params[] = "%" . $search . "%";
+    }
+
+    $sql .= " ORDER BY created_at DESC";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchAll();
 }
 
 /**

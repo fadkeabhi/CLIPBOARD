@@ -3,12 +3,15 @@
         <div class="jumbotron text-center py-5">
             <h1 class="display-4">Welcome to <?= e(SITE_NAME) ?></h1>
             <p class="lead">Create collaborative clipboards and share snippets with your team.</p>
+                <p>Explore our publically available boards.</p>
+                <a class="btn btn-outline-secondary me-2" href="<?= SITE_URL ?>/b">View Public Boards</a>
+
             <?php if (!isLoggedIn()): ?>
                 <hr class="my-4">
                 <p>Get started by creating an account or logging in.</p>
                 <a class="btn btn-primary btn-lg me-2" href="<?= SITE_URL ?>/register" role="button">Register</a>
                 <a class="btn btn-secondary btn-lg" href="<?= SITE_URL ?>/login" role="button">Login</a>
-            <?php endif; ?>
+                <?php endif; ?>
         </div>
 
         <?php if (isLoggedIn()): ?>
@@ -17,9 +20,6 @@
                     <h5 class="mb-0">Create New Board</h5>
                     <!-- Button to trigger modal -->
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createBoardModal">Create Board</button>
-                </div>
-                <div class="card-body">
-                    <p class="text-muted mb-0">Click the "Create Board" button to open the create-board dialog.</p>
                 </div>
             </div>
 
@@ -56,6 +56,14 @@
                                     </label>
                                 </div>
 
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="modal_list_publically" name="list_publically">
+                                    <label class="form-check-label" for="modal_list_publically">
+                                        List this board publicly on the boards page
+                                    </label>
+                                    <div class="form-text text-muted" id="modal_list_hint">When creating a private board this option will be disabled.</div>
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="modal_password" class="form-label">Password Protection (Optional)</label>
                                     <input type="password" class="form-control" id="modal_password" name="password">
@@ -68,6 +76,26 @@
                             <button type="button" class="btn btn-primary" onclick="document.getElementById('createBoardForm').submit();">Create Board</button>
                         </div>
                     </div>
+
+                        <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const modalAccess = document.getElementById('modal_default_access');
+                            const modalList = document.getElementById('modal_list_publically');
+                            if (modalAccess && modalList) {
+                                function updateModalList() {
+                                    if (modalAccess.value === 'private') {
+                                        modalList.checked = false;
+                                        modalList.disabled = true;
+                                    } else {
+                                        modalList.disabled = false;
+                                    }
+                                }
+                                modalAccess.addEventListener('change', updateModalList);
+                                // initialize
+                                updateModalList();
+                            }
+                        });
+                        </script>
                 </div>
             </div>
 

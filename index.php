@@ -58,7 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_POST['name'] ?? '',
                 $_POST['default_access'] ?? 'private',
                 isset($_POST['is_editable']),
-                $_POST['password'] ?? null
+                $_POST['password'] ?? null,
+                isset($_POST['list_publically'])
             );
             $_SESSION['message'] = $result['message'];
             $_SESSION['message_type'] = $result['success'] ? 'success' : 'danger';
@@ -170,7 +171,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $settings = [
                 'name' => $_POST['name'] ?? $board['name'],
                 'default_access' => $_POST['default_access'] ?? $board['default_access'],
-                'is_editable' => isset($_POST['is_editable'])
+                'is_editable' => isset($_POST['is_editable']),
+                'list_publically' => isset($_POST['list_publically'])
             ];
 
             $passwordRemoved = false;
@@ -287,6 +289,20 @@ if (empty($url)) {
     $userBoards = isLoggedIn() ? getUserBoards(getCurrentUserId()) : [];
     include __DIR__ . '/templates/header.php';
     include __DIR__ . '/templates/home.php';
+    include __DIR__ . '/templates/footer.php';
+    exit;
+}
+
+// Public boards listing: /b (no suburl) with optional filters via query params
+if ($url === 'b') {
+    // Read filters from query string: ?q=search&type=public_view|public_add
+    $search = $_GET['q'] ?? null;
+    $type = $_GET['type'] ?? null;
+
+    $publicBoards = getPublicBoards($search, $type);
+
+    include __DIR__ . '/templates/header.php';
+    include __DIR__ . '/templates/public_boards.php';
     include __DIR__ . '/templates/footer.php';
     exit;
 }

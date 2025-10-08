@@ -39,6 +39,17 @@
                     </div>
                     
                     <div class="mb-3 form-check">
+                        <?php $isPrivate = ($board['default_access'] === 'private'); ?>
+                        <input type="checkbox" class="form-check-input" id="list_publically" name="list_publically" <?= $board['list_publically'] ? 'checked' : '' ?> <?= $isPrivate ? 'disabled' : '' ?>>
+                        <label class="form-check-label" for="list_publically">
+                            List this board publicly on the boards page
+                        </label>
+                        <?php if ($isPrivate): ?>
+                            <div class="form-text text-muted">This board is private, private boards cannot be listed publicly. Change Public Access to enable this option.</div>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="is_editable" name="is_editable" 
                             <?= $board['is_editable'] ? 'checked' : '' ?>>
                         <label class="form-check-label" for="is_editable">
@@ -191,6 +202,19 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 passwordInput.disabled = false;
                 passwordInput.placeholder = 'Enter new password to change it';
+            }
+        });
+    }
+    // Disable/enable listing checkbox when default access changes
+    const defaultAccessSelect = document.getElementById('default_access');
+    const listCheckbox = document.getElementById('list_publically');
+    if (defaultAccessSelect && listCheckbox) {
+        defaultAccessSelect.addEventListener('change', function() {
+            if (this.value === 'private') {
+                listCheckbox.checked = false;
+                listCheckbox.disabled = true;
+            } else {
+                listCheckbox.disabled = false;
             }
         });
     }
