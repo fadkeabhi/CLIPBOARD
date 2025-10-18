@@ -713,8 +713,19 @@ function canEditClip($userId, $board, $clip) {
         return isBoardAdmin($userId, $board);
     }
     
-    // Otherwise, anyone with edit permission can edit
-    return canEditBoard($userId, $board);
+    // If board is editable, only the clip creator OR board admins/owner can edit
+    // Check if user is the clip creator
+    if ($userId && $clip['user_id'] && $userId == $clip['user_id']) {
+        return true;
+    }
+    
+    // Check if user is board owner
+    if ($userId && $board['owner_id'] && $userId == $board['owner_id']) {
+        return true;
+    }
+    
+    // Check if user is board admin
+    return isBoardAdmin($userId, $board);
 }
 
 // ============================================================================
